@@ -43,7 +43,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       <div class="card__footer">
         {
           post.url && (
-            <a href={post.url} class="card__url">
+            <a href={post.url} class="card__url" target="_blank">
               {domain}
             </a>
           )

@@ -1,20 +1,26 @@
 ---
-import Card from "../components/Card.astro";
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Card from "../components/Card.astro";
+import Feature from "../components/Feature.astro";
 import { getPosts } from "../utils/sanity";
 
 const posts = await getPosts();
 ---
 
 <Layout title="Home">
+  <Hero />
+
   <section>
-    {posts.length ? posts.map((post) => <Card post={post} />) : <Welcome />}
+    {posts.length ? posts.map((post) => <Card post={post} />) : <p>no posts</p>}
   </section>
+
+  <Feature />
 </Layout>
 
 <style>
   section {
+    padding: var(--space-8) 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;

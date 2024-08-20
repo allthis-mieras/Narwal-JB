@@ -31,14 +31,14 @@ const { title } = Astro.props;
   <body>
     <div class="container">
       <header class="header">
-        <a class="header__title" href="/">Astro + Sanity</a>
+        <a class="header__title" href="/">Jacques Buith</a>
         <nav>
           <ul>
             <li>
               <a href="/about">About</a>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <a href="/articles">Articles</a>
             </li>
           </ul>
         </nav>
@@ -47,6 +47,10 @@ const { title } = Astro.props;
         <slot />
       </main>
       <footer class="footer">
+        <div class="footer__inner">
+          <h3>Get in contact</h3>
+          <a href="#">Linkedin</a>
+        </div>
         <p class="footer__text">
           Made with <svg
             data-sanity-icon="heart-filled"
@@ -98,8 +102,14 @@ const { title } = Astro.props;
 
       .footer {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
         padding: 0 var(--space-3);
+
+        & .footer__inner {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
 
         & .footer__text {
           font-size: var(--font-size-1);
@@ -112,7 +122,7 @@ const { title } = Astro.props;
 
       @media (min-width: 575px) {
         .container {
-          max-width: var(--max-width-1);
+          /* max-width: var(--max-width-1); */
           padding: 0 var(--space-4);
         }
 

@@ -18,11 +18,37 @@ export async function getStaticPaths() {
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { slug } = Astro.params as Params;
 
+function extractDomain(url: string) {
+  const urlObject = new URL(url);
+  return urlObject.hostname;
+}
+
 const post = await getPost(slug);
+
+const domain = post.url ? extractDomain(post.url) : "";
 ---
 
 <Layout title={post.title!}>
   <section class="post">
+    <div class="post__container">
+      <p class="post__date">
+        {formatDate(post._createdAt)}
+      </p>
+      <h1 class="post__title">{post.title}</h1>
+      <p class="post__excerpt">{post.excerpt}</p>
+
+      <div class="post__content">
+        <PortableText value={post.body} />
+      </div>
+      {
+        post.url && (
+          <a href={post.url} class="card__url" target="_blank">
+            {domain}
+          </a>
+        )
+      }
+    </div>
+
     {
       post.mainImage ? (
         <img
@@ -34,16 +60,6 @@ const post = await getPost(slug);
         <div class="post__cover--none" />
       )
     }
-    <div class="post__container">
-      <h1 class="post__title">{post.title}</h1>
-      <p class="post__excerpt">{post.excerpt}</p>
-      <p class="post__date">
-        {formatDate(post._createdAt)}
-      </p>
-      <div class="post__content">
-        <PortableText value={post.body} />
-      </div>
-    </div>
   </section>
 </Layout>
 
@@ -51,6 +67,9 @@ const post = await getPost(slug);
   .post {
     width: 100%;
     margin: var(--space-1) 0 var(--space-4);
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 
     & .post__cover,
     & .post__cover--none {
