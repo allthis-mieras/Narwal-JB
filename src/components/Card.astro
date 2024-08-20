@@ -18,17 +18,6 @@ const domain = post.url ? extractDomain(post.url) : "";
 ---
 
 <div class="card">
-  {
-    post.mainImage ? (
-      <img
-        class="card__cover"
-        src={urlFor(post.mainImage).width(500).height(300).url()}
-        alt="Cover image"
-      />
-    ) : (
-      <div class="card__cover--none" />
-    )
-  }
   <div class="card__container">
     <div class="card__top">
       <p class="card__cat">{post.category}</p>
@@ -54,20 +43,39 @@ const domain = post.url ? extractDomain(post.url) : "";
       </div>
     </div>
   </div>
+  <div class="card__media">
+    {
+      post.mainImage ? (
+        <img
+          class="card__cover"
+          src={urlFor(post.mainImage).width(500).height(300).url()}
+          alt="Cover image"
+        />
+      ) : (
+        <div class="card__cover--none" />
+      )
+    }
+  </div>
+</div>
 
-  <style>
-    .card {
-      display: flex;
-      flex-direction: row;
-      padding: var(--space-2);
-      padding: 1rem;
-      position: relative;
-      /* border-bottom: 1px solid #ced2d9; */
-      min-height: 40vh;
-      border-radius: 1rem;
-      overflow: hidden;
+<style>
+  .card {
+    display: flex;
+    flex-direction: row;
+    padding: var(--space-2);
+    padding: 1rem;
+    position: relative;
+    /* border-bottom: 1px solid #ced2d9; */
+    min-height: 40vh;
+    border-radius: 1rem;
+    overflow: hidden;
 
-      &::after {
+    &:active {
+      transform: scale(0.98);
+    }
+
+    & .card__media {
+      /* &::after {
         content: "";
         position: absolute;
         top: 0;
@@ -77,110 +85,144 @@ const domain = post.url ? extractDomain(post.url) : "";
 
         background: linear-gradient(#ffffff47, #cee3ffea);
         backdrop-filter: blur(0.5rem);
-        z-index: 1;
-        pointer-events: none; /* Zorgt ervoor dat de overlay geen interacties blokkeert */
+        z-index: 0;
       }
 
-      & .card__container {
-        margin: 0 var(--space-1) 0;
-        z-index: 2;
+      &:hover::after {
+        backdrop-filter: blur(0rem);
+        background-color: red;
+      } */
+    }
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
+    & .card__container {
+      margin: 0 var(--space-1) 0;
 
-      & .card__cover {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        object-fit: cover;
-        z-index: -1;
-        transform: scale(1.1);
-      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-      & .card__cover--none {
-        /* width: 100%; */
-        display: none;
-        background: var(--white);
-      }
+    & .card__cover {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -1;
+      transform: scale(1.1);
+    }
 
-      & .card__cat {
-        font-size: var(--font-size-1);
-      }
+    & .card__cover--none {
+      /* width: 100%; */
+      display: none;
+      background: var(--black);
+    }
 
-      & .card__title {
-        font-family: var(--font-family-sans);
-        font-weight: 800;
-        font-size: var(--font-size-7);
-        line-height: var(--line-height-6);
-        letter-spacing: -0.025em;
-        margin: var(--space-3) 0;
-      }
+    & .card__top {
+      z-index: 10;
+    }
 
-      & .card__excerpt {
-        font-family: var(--font-family-serif);
+    & .card__cat {
+      font-size: var(--font-size-1);
+      z-index: 10;
+    }
+
+    & .card__title {
+      font-family: var(--font-family-sans);
+      font-weight: 300;
+      font-size: var(--font-size-6);
+      line-height: var(--line-height-6);
+      letter-spacing: -0.025em;
+      margin: var(--space-3) 0;
+    }
+
+    & .card__excerpt {
+      font-family: var(--font-family-sans);
+      font-weight: 400;
+      font-size: var(--font-size-1);
+      line-height: var(--line-height-1);
+      margin-top: 0;
+      /* truncate */
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    & .card__bottom {
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    & .card__footer {
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      align-items: baseline;
+      margin-top: var(--space-4);
+      pointer-events: inherit;
+
+      & .card__date {
         font-weight: 400;
-        font-size: var(--font-size-2);
-        line-height: var(--line-height-3);
-        margin-top: 0;
-        /* truncate */
-        display: -webkit-box;
-        line-clamp: 2;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-family: var(--font-family-sans);
+        font-size: var(--font-size-0);
+        margin-top: calc(var(----space-4) + 7);
       }
 
-      & .card__footer {
-        display: flex;
-        justify-content: space-between;
-
-        align-items: baseline;
-        margin-top: var(--space-4);
-
-        & .card__date {
-          font-weight: 600;
-          font-family: var(--font-family-sans);
-          font-size: var(--font-size-1);
-          margin-top: calc(var(----space-4) + 7);
-        }
-
-        & .card__url {
-          padding: 1rem;
-          color: var(--black);
-          text-decoration: none;
-          border-radius: 100vw;
-          z-index: 10;
-          background-color: yellow;
-
-          &:hover {
-            opacity: 0.8;
-            transition: 0.2s;
-          }
-        }
-      }
-
-      & .card__link {
+      & .card__url {
+        padding: 0.5rem 0.875rem;
         color: var(--black);
         text-decoration: none;
+        border-radius: 100vw;
+        z-index: 10;
+        background-color: yellow;
+        pointer-events: all;
+        font-size: var(--font-size-0);
 
         &:hover {
           opacity: 0.8;
-          transition: opacity 0.2s ease-in-out;
-        }
-
-        &::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: 0;
+          transition: 0.2s;
         }
       }
+    }
 
-      /* &:first-child {
+    & .card__link {
+      color: var(--black);
+      text-decoration: none;
+      /* transition: all 0.5s ease-in-out; */
+
+      /* &:hover {
+        opacity: 0.8;
+      } */
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background: linear-gradient(
+          180deg,
+          rgba(237, 247, 252, 0.8) 0%,
+          rgba(237, 247, 252, 0.9) 100%
+        );
+        transition: all 2.2s cubic-bezier(0, 0.55, 0.45, 1);
+        backdrop-filter: blur(0rem);
+        opacity: 0.5;
+      }
+
+      &:hover::before {
+        background: linear-gradient(
+          180deg,
+          rgba(237, 247, 252, 0.8) 0%,
+          rgba(237, 247, 252, 0.9) 100%
+        );
+        backdrop-filter: blur(4rem);
+        opacity: 0.95;
+      }
+    }
+
+    /* &:first-child {
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
       }
@@ -189,37 +231,36 @@ const domain = post.url ? extractDomain(post.url) : "";
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
       } */
-    }
+  }
 
-    @media (min-width: 575px) {
-      .card {
-        /* border: 1px solid #ced2d9; */
-        border-bottom: none;
+  @media (min-width: 575px) {
+    .card {
+      /* border: 1px solid #ced2d9; */
+      border-bottom: none;
 
-        & .card__title {
-          margin-top: var(--space-4);
-        }
+      & .card__title {
+        margin-top: var(--space-4);
+      }
 
-        &:last-child {
-          /* border-bottom: 1px solid #ced2d9; */
-        }
+      &:last-child {
+        /* border-bottom: 1px solid #ced2d9; */
       }
     }
+  }
 
-    @media (min-width: 800px) {
-      .card {
-        flex-direction: row;
+  @media (min-width: 800px) {
+    .card {
+      flex-direction: row;
 
-        & .card__container {
-          margin: 0 var(--space-4) 0;
-        }
+      & .card__container {
+        margin: 0 var(--space-2) 0;
+      }
 
-        & .card__cover,
-        & .card__cover--none {
-          width: 100%;
-          height: 100%;
-        }
+      & .card__cover,
+      & .card__cover--none {
+        width: 100%;
+        height: 100%;
       }
     }
-  </style>
-</div>
+  }
+</style>
