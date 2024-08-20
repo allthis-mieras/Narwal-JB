@@ -66,6 +66,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       min-height: 40vh;
       border-radius: 1rem;
       overflow: hidden;
+
       &::after {
         content: "";
         position: absolute;
@@ -73,7 +74,9 @@ const domain = post.url ? extractDomain(post.url) : "";
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(255, 0, 0, 0.5); /* Semi-transparante overlay */
+
+        background: linear-gradient(#ffffff47, #cee3ffea);
+        backdrop-filter: blur(0.5rem);
         z-index: 1;
         pointer-events: none; /* Zorgt ervoor dat de overlay geen interacties blokkeert */
       }
@@ -95,27 +98,14 @@ const domain = post.url ? extractDomain(post.url) : "";
         left: 0;
         object-fit: cover;
         z-index: -1;
-
-        &::after {
-          content: "hello";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(255, 0, 0, 0.5); /* Semi-transparante rode overlay */
-          z-index: 1;
-          pointer-events: none; /* Zorgt ervoor dat de overlay geen interacties blokkeert */
-        }
+        transform: scale(1.1);
       }
 
       & .card__cover--none {
-        width: 100%;
-
-        background: var(--black);
+        /* width: 100%; */
+        background: var(--white);
       }
+
       & .card__cat {
         font-size: var(--font-size-1);
       }
@@ -178,7 +168,7 @@ const domain = post.url ? extractDomain(post.url) : "";
 
         &:hover {
           opacity: 0.8;
-          transition: 0.2s;
+          transition: opacity 0.2s ease-in-out;
         }
 
         &::before {
