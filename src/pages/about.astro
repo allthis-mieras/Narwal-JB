@@ -27,8 +27,8 @@ const mainImage = urlFor(page.mainImage).url();
         <Image
           src={mainImage}
           inferSize={true}
-          widths={[240, 540, 720, mainImage.width]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${mainImage.width}px`}
+          widths={[240, 540, 720, 1920]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1920px`}
           alt={page.title}
         />
       )
