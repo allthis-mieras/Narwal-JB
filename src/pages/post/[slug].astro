@@ -6,6 +6,8 @@ import { formatDate } from "../../utils";
 import { urlFor } from "../../utils/image";
 import { getPost, getPosts } from "../../utils/sanity";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const posts = await getPosts();
   return posts.map((post) => ({
