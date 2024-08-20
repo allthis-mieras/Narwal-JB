@@ -18,13 +18,15 @@ import react from "@astrojs/react";
 
 // Change this depending on your hosting provider (Vercel, Netlify etc)
 // https://docs.astro.build/en/guides/server-side-rendering/#adding-an-adapter
-import vercel from "@astrojs/vercel/serverless";
+// import vercel from "@astrojs/vercel/serverless";
+ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
   // Hybrid+adapter is required to support embedded Sanity Studio
-  output: "hybrid",
-  adapter: vercel(),
+  // output: "hybrid",
+      output: 'server',
+    adapter: netlify(),
   integrations: [sanity({
     projectId,
     dataset,

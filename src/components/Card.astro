@@ -9,7 +9,7 @@ interface Props {
 
 const { post } = Astro.props;
 
-function extractDomain(url) {
+function extractDomain(url: string) {
   const urlObject = new URL(url);
   return urlObject.hostname;
 }
