@@ -1,9 +1,11 @@
 import {defineField, defineType} from 'sanity'
+import {FolderIcon} from '@sanity/icons'
 
 export default defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
+  icon: FolderIcon,
   fields: [
     defineField({
       name: 'title',
@@ -21,6 +23,11 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'date',
+      title: 'Date',
+      type: 'datetime',
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
@@ -32,6 +39,34 @@ export default defineType({
       type: 'image',
       options: {
         hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'thumbnail',
+      title: 'Thumbnail',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'url',
+      title: 'External URL',
+      type: 'url',
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https']
+      }),
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Interview', value: 'interview'},
+          {title: 'Article', value: 'article'},
+        ],
+        layout: 'dropdown',
       },
     }),
     defineField({
@@ -51,4 +86,5 @@ export default defineType({
       return {...selection, subtitle: author && `by ${author}`}
     },
   },
+    
 })

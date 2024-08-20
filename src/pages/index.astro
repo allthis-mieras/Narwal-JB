@@ -7,8 +7,16 @@ import { getPosts } from "../utils/sanity";
 const posts = await getPosts();
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Home">
   <section>
     {posts.length ? posts.map((post) => <Card post={post} />) : <Welcome />}
   </section>
 </Layout>
+
+<style>
+  section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>

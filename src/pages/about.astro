@@ -1,0 +1,53 @@
+---
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import { urlFor } from "../utils/image";
+import { getImage, Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+
+const page = await sanityClient.fetch(`*[_type == "about"][0]{
+  title,
+  content,
+  mainImage{
+    asset->{
+      _id,
+      url
+    }
+  }
+}`);
+
+const mainImage = urlFor(page.mainImage).url();
+---
+
+<Layout title={page.title}>
+  <section class="about">
+    {
+      mainImage && (
+        <Image
+          src={mainImage}
+          inferSize={true}
+          widths={[240, 540, 720, mainImage.width]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${mainImage.width}px`}
+          alt={page.title}
+        />
+      )
+    }
+    <div class="about__content">
+      <h1>{page.title}</h1>
+      <div class="page__content">
+        <PortableText value={page.content} />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .about {
+    /* Voeg hier je eigen CSS-stijlen toe */
+  }
+</style>

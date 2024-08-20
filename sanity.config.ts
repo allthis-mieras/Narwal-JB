@@ -18,17 +18,78 @@ if (!projectId || !dataset) {
 }
 
 import { defineConfig } from "sanity";
-import { structureTool } from "sanity/structure";
+import { structureTool } from 'sanity/structure'
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schema";
+import { CogIcon, DocumentIcon } from "@sanity/icons";
+
+
+
+// Define the actions that should be available for singleton documents
+const singletonActions = new Set(["publish", "discardChanges", "restore"])
+
+// Define the singleton document types
+const singletonTypes = new Set(["settings", "about"])
 
 export default defineConfig({
-  name: "project-name",
-  title: "Project Name",
+  name: "JacquesBuith",
+  title: "Jacques Buith",
   projectId,
   dataset,
-  plugins: [structureTool(), visionTool()],
+   plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title("Content")
+          .items([
+          // Regular document types
+            S.documentTypeListItem("post").title("Posts"),
+            // Our singleton type has a list item with a custom child
+           
+            S.listItem()
+              .title("About")
+              .id("about")
+              .icon(DocumentIcon)
+              .child(
+                S.document()
+                  .schemaType("about")
+                  .documentId("about")
+              ),
+             S.listItem()
+              .title("Settings")
+              .id("settings")
+              .icon(CogIcon)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("settings")
+                  .documentId("settings")
+              ),
+            // Singleton for About Page
+            
+          ]),
+    }),
+    visionTool(),
+
+  ],
+
+
   schema: {
     types: schemaTypes,
+
+    // Filter out singleton types from the global “New document” menu options
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
-});
+
+  document: {
+    // For singleton types, filter out actions that are not explicitly included
+    // in the `singletonActions` list defined above
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
+  },
+})
