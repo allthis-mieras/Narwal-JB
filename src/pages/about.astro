@@ -21,21 +21,16 @@ const mainImage = urlFor(page.mainImage).url();
 ---
 
 <Layout title={page.title}>
-  <section class="about">
-    {
-      mainImage && (
-        <Image
-          src={mainImage}
-          inferSize={true}
-          widths={[240, 540, 720, 1920]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1920px`}
-          alt={page.title}
-        />
-      )
-    }
-    <div class="about__content">
+  <section class="page__container">
+    <img
+      class="page__cover"
+      src={urlFor(page.mainImage).url()}
+      alt="Cover image"
+    />
+
+    <div class="page__content">
       <h1>{page.title}</h1>
-      <div class="page__content">
+      <div class="page__text">
         <PortableText value={page.content} />
       </div>
     </div>
@@ -43,11 +38,41 @@ const mainImage = urlFor(page.mainImage).url();
 </Layout>
 
 <style>
-  img {
-    max-width: 100%;
-    height: auto;
+  .page__container {
+    width: 100%;
+    margin: var(--space-1) 0 var(--space-4);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    & .page__cover,
+    & .page__cover--none {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      order: 1;
+    }
+
+    & .page__cover--none {
+      background: var(--black);
+    }
+
+    & .page__container {
+      padding: 0 var(--space-3);
+    }
   }
-  .about {
-    /* Voeg hier je eigen CSS-stijlen toe */
+
+  @media (min-width: 575px) {
+    .page__container {
+      width: 100%;
+      margin: var(--space-1) 0 var(--space-4);
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+      & .page__cover {
+        order: 2;
+      }
+    }
   }
 </style>
