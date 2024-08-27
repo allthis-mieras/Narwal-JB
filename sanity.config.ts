@@ -6,6 +6,9 @@ const dataset =
   import.meta.env.PUBLIC_SANITY_STUDIO_DATASET! ||
   import.meta.env.PUBLIC_SANITY_DATASET!;
 
+const previewUrls = import.meta.env.SANITY_STUDIO_PREVIEW_URLS?.split(",") || [];
+const isPreviewMode = import.meta.env.PUBLIC_PREVIEW_MODE === 'true';
+
 // Feel free to remove this check if you don't need it
 if (!projectId || !dataset) {
   throw new Error(
@@ -19,6 +22,7 @@ if (!projectId || !dataset) {
 
 import { defineConfig } from "sanity";
 import { structureTool } from 'sanity/structure'
+import { presentationTool } from 'sanity/presentation'
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schema";
 import { CogIcon, DocumentIcon } from "@sanity/icons";
@@ -72,6 +76,11 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
+    presentationTool({
+      // Required: set the base URL to the preview location in the front end
+      // previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000",
+      previewUrl: previewUrls
+    }),
 
   ],
 
@@ -91,5 +100,32 @@ export default defineConfig({
       singletonTypes.has(context.schemaType)
         ? input.filter(({ action }) => action && singletonActions.has(action))
         : input,
+
+      productionUrl: async (prev, context) => {
+    const { getClient, dataset, document } = context;
+    const client = getClient({ apiVersion: '2023-05-31' });
+
+    if (document._type === 'post') {
+      const slug = await client.fetch(
+        `*[_type == 'post' && _id == $postId][0].slug.current`,
+        { postId: document._id }
+      );
+
+      if (!slug) {
+        return prev; // Als de slug niet wordt gevonden, gebruik de vorige URL
+      }
+
+      const params = new URLSearchParams();
+      params.set('preview', 'true');
+      params.set('dataset', dataset);
+
+      return `http://localhost:4321/${slug}?${params}`;
+    }
+
+    return prev;
+    }
   },
+
+  
 })
+

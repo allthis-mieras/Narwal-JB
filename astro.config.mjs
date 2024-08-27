@@ -14,6 +14,7 @@ import isPreviewMode from './src/utils/isPreviewMode';
 const projectId = PUBLIC_SANITY_STUDIO_PROJECT_ID || PUBLIC_SANITY_PROJECT_ID;
 const dataset = PUBLIC_SANITY_STUDIO_DATASET || PUBLIC_SANITY_DATASET;
 
+
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 
@@ -32,11 +33,12 @@ export default defineConfig({
     projectId,
     dataset,
     studioBasePath: "/admin",
+      
     useCdn: false,
     // `false` if you want to ensure fresh data
     apiVersion: "2023-03-20", // Set to date of setup to use the latest API version
     perspective: isPreviewMode? 'previewDrafts' : 'published', 
-    // token: isPreviewMode ? PUBLIC_SANITY_AUTH_TOKEN : undefined,
+    token: isPreviewMode ? import.meta.env.PUBLIC_SANITY_AUTH_TOKEN : undefined,
     // ignoreBrowserTokenWarning: isPreviewMode ? true : false
 
   }), react() // Required for Sanity Studio
