@@ -26,6 +26,7 @@ export default defineType({
         hotspot: true,
       },
     }),
+    
   ],
   
 })

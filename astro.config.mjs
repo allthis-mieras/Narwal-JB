@@ -8,6 +8,7 @@ const {
   PUBLIC_SANITY_DATASET,
 } = loadEnv(import.meta.env.MODE, process.cwd(), "");
 import { defineConfig } from "astro/config";
+import isPreviewMode from './src/utils/isPreviewMode';
 
 // Different environments use different variables
 const projectId = PUBLIC_SANITY_STUDIO_PROJECT_ID || PUBLIC_SANITY_PROJECT_ID;
@@ -25,15 +26,19 @@ import react from "@astrojs/react";
 export default defineConfig({
   // Hybrid+adapter is required to support embedded Sanity Studio
   // output: "hybrid",
-      output: 'server',
-    adapter: netlify(),
+  output: 'server',
+  adapter: netlify(),
   integrations: [sanity({
     projectId,
     dataset,
     studioBasePath: "/admin",
     useCdn: false,
     // `false` if you want to ensure fresh data
-    apiVersion: "2023-03-20" // Set to date of setup to use the latest API version
+    apiVersion: "2023-03-20", // Set to date of setup to use the latest API version
+    perspective: isPreviewMode? 'previewDrafts' : 'published', 
+    // token: isPreviewMode ? PUBLIC_SANITY_AUTH_TOKEN : undefined,
+    // ignoreBrowserTokenWarning: isPreviewMode ? true : false
+
   }), react() // Required for Sanity Studio
   ]
 });
