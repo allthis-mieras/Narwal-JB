@@ -78,8 +78,8 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       // Required: set the base URL to the preview location in the front end
-      // previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000",
-      previewUrl: previewUrls
+      previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:4321",
+      // previewUrl: previewUrls
     }),
 
   ],
