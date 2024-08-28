@@ -1,7 +1,10 @@
-import blockContent from './blockContent'
-import post from './post'
-import about from './about'
-// import page from './page'
-import settings from './settings'
+import schemaContentTypes from './contentTypes/index';
+import schemaElements from './elements/index';
+import schemaSectionBlocks from './sectionBlocks/index';
 
-export const schemaTypes = [post, about, settings, blockContent]
+
+export const schemaTypes = [
+  ...schemaContentTypes,
+  ...schemaElements,
+  ...schemaSectionBlocks,
+];

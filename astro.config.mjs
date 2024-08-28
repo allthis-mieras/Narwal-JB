@@ -21,7 +21,7 @@ import react from "@astrojs/react";
 // Change this depending on your hosting provider (Vercel, Netlify etc)
 // https://docs.astro.build/en/guides/server-side-rendering/#adding-an-adapter
 // import vercel from "@astrojs/vercel/serverless";
- import netlify from '@astrojs/netlify';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
@@ -36,7 +36,7 @@ export default defineConfig({
       
     useCdn: false,
     // `false` if you want to ensure fresh data
-    apiVersion: "2023-03-20", // Set to date of setup to use the latest API version
+    apiVersion: "2023-05-31", // Set to date of setup to use the latest API version
     perspective: isPreviewMode? 'previewDrafts' : 'published', 
     token: isPreviewMode ? import.meta.env.PUBLIC_SANITY_AUTH_TOKEN : undefined,
     // ignoreBrowserTokenWarning: isPreviewMode ? true : false
@@ -44,3 +44,26 @@ export default defineConfig({
   }), react() // Required for Sanity Studio
   ]
 });
+
+
+
+import { createClient } from "@sanity/client";
+
+// Initialize Sanity client
+const client = createClient({
+  projectId: projectId,
+  dataset: dataset,
+  useCdn: false, // Ensure no accidental 'stale' data
+  apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
+});
+
+// Fetch our redirects from Sanity via GROQ
+const redirectData = await client.fetch(
+  `*[_type == "redirect"]{
+      "from": from.current,
+      "to": to.current
+    }`
+);
+
+// Create empty object to add our redirects to
+const redirects = {};

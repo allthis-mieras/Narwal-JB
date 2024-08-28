@@ -1,7 +1,7 @@
 ---
+import Layout from "../../layouts/Layout.astro";
 import type { InferGetStaticParamsType } from "astro";
 import { PortableText } from "astro-portabletext";
-import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../utils";
 import { urlFor } from "../../utils/image";
 import { getPost, getPosts } from "../../utils/sanity";
@@ -24,7 +24,6 @@ function extractDomain(url: string) {
 }
 
 const post = await getPost(slug);
-
 const domain = post.url ? extractDomain(post.url) : "";
 ---
 
@@ -53,7 +52,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       post.mainImage ? (
         <img
           class="post__cover"
-          src={urlFor(post.mainImage).url()}
+          src={urlFor(post.mainImage as Image_2).url()}
           alt="Cover image"
         />
       ) : (

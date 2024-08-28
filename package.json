@@ -27,12 +27,15 @@
     "astro-portabletext": "0.10.0",
     "astro-sanity-picture": "^0.2.0",
     "autoprefixer": "10.4.19",
+    "get-video-id": "^4.1.7",
     "groq": "3.48.1",
+    "nanoid": "^5.0.7",
     "prettier-plugin-astro": "0.14.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sanity": "3.48.1",
-    "sanity-plugin-iframe-pane": "^3.1.6"
+    "sanity-plugin-iframe-pane": "^3.1.6",
+    "swiper": "^11.1.11"
   },
   "devDependencies": {
     "@portabletext/types": "2.0.13",

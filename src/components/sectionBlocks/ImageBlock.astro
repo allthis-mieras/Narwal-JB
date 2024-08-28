@@ -1,0 +1,29 @@
+---
+import { urlFor } from "../../utils/image";
+const { image } = Astro.props;
+const imageUrl = image?.asset ? urlFor(image.asset).url() : "";
+
+console.log("Hello, this is the image:", image);
+---
+
+{
+  imageUrl && (
+    <div class="image-block">
+      <img src={imageUrl} alt={image.alt ?? "Image"} />
+      {image.caption && <p class="caption">{image.caption}</p>}
+    </div>
+  )
+}
+
+<style>
+  .image-block img {
+    width: 100%;
+    height: auto;
+  }
+
+  .caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #666;
+  }
+</style>

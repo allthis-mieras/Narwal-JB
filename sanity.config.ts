@@ -26,7 +26,14 @@ import { presentationTool } from 'sanity/presentation'
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schema";
 import { CogIcon, DocumentIcon } from "@sanity/icons";
+import type { SanityDocument } from 'sanity'
 
+// Pas deze functie aan om de juiste URL weer te geven op basis van het huidige document
+function getPreviewUrl(doc: SanityDocument) {
+  return doc?.slug && typeof doc.slug === 'object' && 'current' in doc.slug
+    ? `${window.location.host}/${doc.slug.current}`
+    : window.location.host
+}
 
 
 // Define the actions that should be available for singleton documents
@@ -48,6 +55,7 @@ export default defineConfig({
           .items([
           // Regular document types
             S.documentTypeListItem("post").title("Posts"),
+             S.documentTypeListItem("page").title("Pages"),
             // Our singleton type has a list item with a custom child
            
             S.listItem()
@@ -78,13 +86,12 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       // Required: set the base URL to the preview location in the front end
-      previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:4321",
-      // previewUrl: previewUrls
+      // previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:4321",
+      
+      previewUrl: previewUrls
     }),
 
   ],
-
-
   schema: {
     types: schemaTypes,
 
@@ -92,7 +99,6 @@ export default defineConfig({
     templates: (templates) =>
       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
-
   document: {
     // For singleton types, filter out actions that are not explicitly included
     // in the `singletonActions` list defined above
@@ -101,8 +107,8 @@ export default defineConfig({
         ? input.filter(({ action }) => action && singletonActions.has(action))
         : input,
 
-      productionUrl: async (prev, context) => {
-    const { getClient, dataset, document } = context;
+    productionUrl: async (prev, context) => {
+      const { getClient, dataset, document } = context;
     const client = getClient({ apiVersion: '2023-05-31' });
 
     if (document._type === 'post') {
@@ -119,7 +125,7 @@ export default defineConfig({
       params.set('preview', 'true');
       params.set('dataset', dataset);
 
-      return `http://localhost:4321/${slug}?${params}`;
+      return `http://localhost:4321/post/${slug}?${params}`;
     }
 
     return prev;
