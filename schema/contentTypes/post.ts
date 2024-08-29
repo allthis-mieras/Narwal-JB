@@ -89,17 +89,3 @@ export default defineType({
     
 })
 
-
-export interface Post {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  date: string;
-  excerpt: string;
-  mainImage: { asset: { _id: string; url: string } };
-  thumbnail?: { asset: { _id: string; url: string } };
-  url?: string; // Optioneel
-  category?: string; // Optioneel
-  body: any;
-  _createdAt: string;
-}

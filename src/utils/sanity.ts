@@ -33,25 +33,18 @@ export interface Slide {
   caption?: string;
 }
 
+
 export interface Post {
   _id: string;
   title: string;
   slug: Slug;
   _createdAt: string;
   excerpt: string;
-  mainImage: {
-    asset: ImageAsset;
-  };
+  mainImage: ImageAsset;
   url?: string;
   category?: string;
-  body: PortableTextBlock[];  // Voeg dit toe
+  body: PortableTextBlock[];
 }
-
-export interface ImageAsset {
-  _id: string; // The ID of the image asset
-  url: string; // The URL of the image
-}
-
 
 export interface Page {
   _type: "page";
@@ -66,6 +59,14 @@ export interface Page {
 export interface ContentModule {
   _type: string;
   [key: string]: any;
+}
+
+export interface ImageAsset {
+  _type: 'image';
+  asset: {
+    _ref: string;  // Reference to the image asset
+    _type: 'reference';
+  };
 }
 
 
@@ -112,10 +113,23 @@ export async function getHomepage(): Promise<Homepage> {
 
 export async function getPost(slug: string): Promise<Post> {
   return await sanityClient.fetch(
-    groq`*[_type == "post" && slug.current == $slug][0]`,
-    {
+    groq`*[_type == "post" && slug.current == $slug][0]{
+      _id,
+      title,
       slug,
-    }
+      _createdAt,
+      excerpt,
+      mainImage{
+        asset->{
+          _id,
+          url
+        }
+      },
+      url,
+      category,
+      body
+    }`,
+    { slug }
   );
 }
 

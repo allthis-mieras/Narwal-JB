@@ -1,12 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+
 import type { InferGetStaticParamsType } from "astro";
 
 import { PortableText } from "astro-portabletext";
 import { formatDate } from "../../utils";
-import { urlFor } from "../../utils/image";
 import { getPost, getPosts } from "../../utils/sanity";
-import type { Image } from "@sanity/types";
+import { urlFor } from "../../utils/image";
+
+// import type { Image } from "@sanity/types";
 
 export const prerender = true;
 
@@ -27,6 +29,16 @@ function extractDomain(url: string) {
 
 const post = await getPost(slug);
 const domain = post.url ? extractDomain(post.url) : "";
+
+export interface ImageAsset {
+  _type: "image";
+  asset: {
+    _ref: string;
+    _type: "reference";
+  };
+}
+
+console.log("post image:", post.mainImage);
 ---
 
 <Layout title={post.title!}>
