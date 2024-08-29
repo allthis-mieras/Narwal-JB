@@ -9,11 +9,11 @@ import groq from "groq";
 export interface Homepage {
   _type: "page"; 
   title: string;
-  homepageHero: {
+  hero: {
     heroText: string;
-    slides: Slide[];
+    heroSlides: Slide[];
   };
-  homepageFeatured: {
+  highlight: {
     text: string;
     button: {
       url: string;
@@ -28,13 +28,10 @@ export interface Slide {
   _type: string;
   asset: {
     _id: string;
-    url: string;
+    url: string;  // Dit veld bevat nu de URL van de afbeelding
   };
   caption?: string;
 }
-
-
-
 
 export interface Post {
   _id: string;
@@ -43,14 +40,11 @@ export interface Post {
   _createdAt: string;
   excerpt: string;
   mainImage: {
-    asset: {
-      _id: string;
-      url: string;
-    };
+    asset: ImageAsset;
   };
   url?: string;
   category?: string;
-  body: PortableTextBlock[];  // Rijke tekst content
+  body: PortableTextBlock[];  // Voeg dit toe
 }
 
 export interface ImageAsset {
@@ -87,11 +81,10 @@ export async function getHomepage(): Promise<Homepage> {
     groq`*[_type == "page" && type == "homepage"][0]{
       _type,
       title,
-      homepageHero{
+      hero{
         heroText,
-        slides[]{
+        heroSlides[]{
           _key,
-          _type,
           asset->{
             _id,
             url
@@ -99,7 +92,7 @@ export async function getHomepage(): Promise<Homepage> {
           caption
         }
       },
-      homepageFeatured{
+      highlight{
         text,
         button{
           url,
@@ -115,7 +108,6 @@ export async function getHomepage(): Promise<Homepage> {
     }`
   );
 }
-
 
 
 export async function getPost(slug: string): Promise<Post> {

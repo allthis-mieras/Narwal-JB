@@ -4,10 +4,12 @@ import type { Slide } from "../utils/sanity";
 
 interface Props {
   heroText: string;
-  slides: Slide[];
+  heroSlides: Slide[];
 }
 
-const { heroText, slides } = Astro.props;
+const { heroText, heroSlides }: Props = Astro.props;
+
+console.log("Hero Slides:", heroSlides); // Controleer of de data correct is
 ---
 
 <section class="hero">
@@ -15,7 +17,7 @@ const { heroText, slides } = Astro.props;
     <h1>{heroText}</h1>
   </div>
 
-  <SwiperJSComponent slides={slides} />
+  <SwiperJSComponent slides={heroSlides} />
 </section>
 
 <style>

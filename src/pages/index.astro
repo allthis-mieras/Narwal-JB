@@ -2,26 +2,35 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Card from "../components/Card.astro";
-import Feature from "../components/Feature.astro";
+import Highlight from "../components/Highlight.astro";
 
 import { getHomepage } from "../utils/sanity";
 import { getPosts } from "../utils/sanity";
 
 const homepage = await getHomepage();
+const { heroText, heroSlides } = homepage.hero;
+const { text, button, image } = homepage.highlight;
 
-const { heroText, slides } = homepage.homepageHero;
+console.log(
+  "index.astro > homepage.hero = ",
+  homepage.hero,
+  "heroSlides = ",
+  heroSlides,
+  "Highlight img = ",
+  homepage.highlight.image
+);
 
 const posts = await getPosts();
 ---
 
 <Layout title="Home">
-  <Hero heroText={heroText} slides={slides} />
+  <Hero heroText={heroText} heroSlides={heroSlides} />
 
   <section>
     {posts.length ? posts.map((post) => <Card post={post} />) : <p>no posts</p>}
   </section>
 
-  <Feature />
+  <Highlight text={text} button={button} image={image} />
 </Layout>
 
 <style>

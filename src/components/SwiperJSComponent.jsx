@@ -8,6 +8,10 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const SwiperJSComponent = ({ slides }) => {
+  if (!slides || slides.length === 0) {
+    // console.error("Slides data is empty or undefined:", slides);
+    return null; // Voeg een fallback toe voor het geval de slides leeg zijn
+  }
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
