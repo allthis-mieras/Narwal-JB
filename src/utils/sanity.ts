@@ -33,24 +33,30 @@ export interface Slide {
   caption?: string;
 }
 
+
+
+
+export interface Post {
+  _id: string;
+  title: string;
+  slug: Slug;
+  _createdAt: string;
+  excerpt: string;
+  mainImage: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+  url?: string;
+  category?: string;
+  body: PortableTextBlock[];  // Rijke tekst content
+}
+
 export interface ImageAsset {
   _id: string;
   url: string;
 }
-
-
-export interface Post {
-  url: any;
-  category: unknown;
-  _type: "post";
-  _createdAt: string;
-  title?: string;
-  slug: Slug;
-  excerpt?: string;
-  mainImage?: ImageAsset;
-  body: PortableTextBlock[];
-}
-
 
 
 export interface Page {
