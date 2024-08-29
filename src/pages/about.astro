@@ -9,7 +9,12 @@ import { PortableText } from "astro-portabletext";
 import { urlFor } from "../utils/image";
 import { getImage, Image } from "astro:assets";
 
-const page = await getAboutPage();
+const page: {
+  title?: string;
+  heroImage?: any;
+  pageText?: any;
+  content: any[];
+} = await getAboutPage();
 ---
 
 <Layout title={page.title ?? ""}>

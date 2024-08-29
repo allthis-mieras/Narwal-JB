@@ -5,24 +5,31 @@ import groq from "groq";
 
 
 
-// Definieer je interfaces
+/// Definieer je interfaces
 export interface Homepage {
-  _type: "homepage";
+  _type: "page"; 
   title: string;
-  heroText: string;
-  slides: Slide[];
-  featuredText: string;
-  featuredImage: ImageAsset;
-  featuredButton: {
-    url: string;
-    label: string;
+  homepageHero: {
+    heroText: string;
+    slides: Slide[];
+  };
+  homepageFeatured: {
+    text: string;
+    button: {
+      url: string;
+      label: string;
+    };
+    image: ImageAsset;
   };
 }
 
 export interface Slide {
   _key: string;
-  imageUrl?: string;
-  videoUrl?: string;
+  _type: string;
+  asset: {
+    _id: string;
+    url: string;
+  };
   caption?: string;
 }
 
@@ -30,7 +37,6 @@ export interface ImageAsset {
   _id: string;
   url: string;
 }
-
 
 
 export interface Post {
@@ -45,31 +51,6 @@ export interface Post {
   body: PortableTextBlock[];
 }
 
-// Definieer je interfaces
-export interface Homepage {
-  _type: "homepage";
-  title: string;
-  heroText: string;
-  slides: Slide[];
-  featuredText: string;
-  featuredImage: ImageAsset;
-  featuredButton: {
-    url: string;
-    label: string;
-  };
-}
-
-export interface Slide {
-  _key: string;
-  imageUrl?: string;
-  videoUrl?: string;
-  caption?: string;
-}
-
-export interface ImageAsset {
-  _id: string;
-  url: string;
-}
 
 
 export interface Page {
@@ -103,11 +84,13 @@ export async function getHomepage(): Promise<Homepage> {
       homepageHero{
         heroText,
         slides[]{
+          _key,
           _type,
           asset->{
             _id,
             url
-          }
+          },
+          caption
         }
       },
       homepageFeatured{

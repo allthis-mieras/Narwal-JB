@@ -8,9 +8,10 @@ import { getHomepage } from "../utils/sanity";
 import { getPosts } from "../utils/sanity";
 
 const homepage = await getHomepage();
-const posts = await getPosts();
 
 const { heroText, slides } = homepage.homepageHero;
+
+const posts = await getPosts();
 ---
 
 <Layout title="Home">
