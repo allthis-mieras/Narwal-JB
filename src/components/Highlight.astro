@@ -1,5 +1,4 @@
 ---
-import type { ImageAsset } from "../utils/sanity";
 import { urlFor } from "../utils/image";
 
 interface Button {
@@ -15,7 +14,7 @@ interface Props {
 
 const { text, button, image }: Props = Astro.props;
 
-console.log("Highlight image:", image);
+console.log("Highlight image:", image.asset.url);
 ---
 
 <section class="feature">
@@ -24,7 +23,7 @@ console.log("Highlight image:", image);
     <a href={button.url} class="button">{button.label}</a>
   </div>
   <img
-    src={urlFor(image ?? {}).url()}
+    src={urlFor(image.asset.url ?? {}).url()}
     alt="Feature image"
     class="feature__image"
   />

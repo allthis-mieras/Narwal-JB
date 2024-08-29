@@ -7,7 +7,7 @@ const { textItems } = Astro.props;
 <div class="text-block">
   <div class={`columns columns-${textItems.length}`}>
     {
-      textItems.map((textItem: any, index: number) => (
+      textItems.map((textItem: any) => (
         <div class="column">
           <PortableText value={textItem.column} />
         </div>

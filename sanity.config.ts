@@ -6,8 +6,8 @@ const dataset =
   import.meta.env.PUBLIC_SANITY_STUDIO_DATASET! ||
   import.meta.env.PUBLIC_SANITY_DATASET!;
 
-const previewUrls = import.meta.env.SANITY_STUDIO_PREVIEW_URLS?.split(",") || [];
-const isPreviewMode = import.meta.env.PUBLIC_PREVIEW_MODE === 'true';
+// const previewUrls = import.meta.env.SANITY_STUDIO_PREVIEW_URLS?.split(",") || [];
+// const isPreviewMode = import.meta.env.PUBLIC_PREVIEW_MODE === 'true';
 
 // Feel free to remove this check if you don't need it
 if (!projectId || !dataset) {
@@ -22,7 +22,7 @@ if (!projectId || !dataset) {
 
 import { defineConfig } from "sanity";
 import { structureTool } from 'sanity/structure'
-import { presentationTool } from 'sanity/presentation'
+// import { presentationTool } from 'sanity/presentation'
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schema";
 import { CogIcon, DocumentIcon } from "@sanity/icons";
@@ -84,12 +84,7 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
-    presentationTool({
-      // Required: set the base URL to the preview location in the front end
-      // previewUrl: import.meta.env.PUBLIC_SANITY_STUDIO_PREVIEW_URL || "http://localhost:4321",
-      
-      previewUrl: previewUrls
-    }),
+   
 
   ],
   schema: {

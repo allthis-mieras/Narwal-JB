@@ -11,6 +11,8 @@ const homepage = await getHomepage();
 const { heroText, heroSlides } = homepage.hero;
 const { text, button, image } = homepage.highlight;
 
+console.log("homepage.highlight:", homepage.highlight, text, button, image);
+
 const posts = await getPosts();
 ---
 

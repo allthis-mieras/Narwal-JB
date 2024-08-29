@@ -48,8 +48,8 @@ export interface Post {
 }
 
 export interface ImageAsset {
-  _id: string;
-  url: string;
+  _id: string; // The ID of the image asset
+  url: string; // The URL of the image
 }
 
 
