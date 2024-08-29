@@ -19,7 +19,7 @@ console.log("Highlight image:", image);
 ---
 
 <section class="feature">
-  <div class="feature__inner">
+  <div class="feature__inner container stretch">
     <p>{text}</p>
     <a href={button.url} class="button">{button.label}</a>
   </div>
@@ -44,7 +44,7 @@ console.log("Highlight image:", image);
   .feature__inner {
     position: absolute;
     inset: 0;
-    padding: var(--space-2);
+    padding: var(--gap-default);
     z-index: 10;
     color: black;
     text-align: left;
@@ -85,7 +85,6 @@ console.log("Highlight image:", image);
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; /* Achter de tekst en de knop */
   }
 
   @media (max-width: 768px) {

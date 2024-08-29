@@ -78,23 +78,23 @@ const domain = post.url ? extractDomain(post.url) : "";
     }
 
     & .card__media {
-      /* &::after {
+      z-index: 4;
+
+      &::after {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+
+        inset: 0;
 
         background: linear-gradient(#ffffff47, #cee3ffea);
-        backdrop-filter: blur(0.5rem);
+        backdrop-filter: blur(0rem);
         z-index: 0;
       }
 
       &:hover::after {
-        backdrop-filter: blur(0rem);
+        backdrop-filter: blur(2rem);
         background-color: red;
-      } */
+      }
     }
 
     & .card__container {
@@ -117,7 +117,6 @@ const domain = post.url ? extractDomain(post.url) : "";
     }
 
     & .card__cover--none {
-      /* width: 100%; */
       display: none;
       background: var(--black);
     }
@@ -146,6 +145,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       font-size: var(--font-size-1);
       line-height: var(--line-height-1);
       margin-top: 0;
+
       /* truncate */
       display: -webkit-box;
       line-clamp: 2;
@@ -153,6 +153,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
     & .card__bottom {
       z-index: 10;
       pointer-events: none;
@@ -203,7 +204,7 @@ const domain = post.url ? extractDomain(post.url) : "";
         content: "";
         position: absolute;
         inset: 0;
-        z-index: -2;
+        z-index: -1;
         background: linear-gradient(
           180deg,
           rgba(237, 247, 252, 0.8) 0%,
@@ -220,7 +221,7 @@ const domain = post.url ? extractDomain(post.url) : "";
           rgba(237, 247, 252, 0.8) 0%,
           rgba(237, 247, 252, 0.9) 100%
         );
-        backdrop-filter: blur(4rem);
+        backdrop-filter: blur(0rem);
         opacity: 0.95;
       }
     }

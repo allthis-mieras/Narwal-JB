@@ -1,0 +1,85 @@
+:root {
+  --radius-small: 0.5rem;
+  --radius-default: 1rem;
+  --radius-large: 2rem;
+  --gap-default: 2rem;
+  --font-measure: 70ch;
+  --font-system: Inter,
+    Roboto,
+    'Helvetica Neue',
+    'Arial Nova',
+    'Nimbus Sans',
+    Arial,
+    sans-serif;
+  --font-family-default: 'Inter', sans-serif, var(--font-system);
+  --font-family-serif: "Playfair Display",
+    serif;
+  --font-family-mono: ui-monospace,
+    'Cascadia Code',
+    'Source Code Pro',
+    Menlo,
+    Consolas,
+    'DejaVu Sans Mono',
+    monospace;
+  // light theme
+  --font-color: var(--neutral-900);
+  --background-full: #fff;
+  --action-color: var(--primary-100);
+  --action-color-state: var(--primary-500);
+  --background: var(--neutral-100);
+  --primary-background: var(--primary-100);
+  --neutral-background: var(--neutral-200);
+
+
+}
+
+// dark color scheme overrides
+.darkmode {
+  --font-color: var(--neutral-100);
+  --background-full: #000;
+  --action-color: var(--secondary-100);
+  --action-color-state: var(--secondary-500);
+  --background: var(--dark-100);
+  --primary-background: var(--primary-500);
+  --neutral-background: var(--neutral-900);
+}
+
+// sticky footer on low content pages
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--font-color);
+  background-color: var(--background);
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  footer {
+    flex-shrink: 0;
+  }
+}
+
+pre {
+  padding: 1rem;
+  border-radius: 0.35rem;
+  border: 2px solid var(--action-color);
+}
+
+body .pagination a {
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--action-color-state);
+
+    svg path {
+      stroke: white;
+    }
+  }
+}

@@ -18,47 +18,56 @@ const page: {
 ---
 
 <Layout title={page.title ?? ""}>
-  <h1>{page.title}</h1>
-  <section class="page__hero">
-    <img
-      class="page__cover"
-      src={urlFor(page.heroImage ?? {}).url()}
-      alt="Cover image"
-    />
+  <div class="container stretch">
+    <h1>{page.title}</h1>
+    <section class="page__hero">
+      <img
+        class="page__cover"
+        src={urlFor(page.heroImage ?? {}).url()}
+        alt="Cover image"
+      />
 
-    <div class="page__content">
-      <div class="page__text">
-        <PortableText value={page.pageText} />
+      <div class="page__content">
+        <div class="page__text">
+          <PortableText value={page.pageText} />
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="content">
-    <div class="page__content">
-      {
-        page.content.map((block) => (
-          <>
-            {block._type === "textBlock" && (
-              <TextBlock textItems={block.textItems} />
-            )}
-            {block._type === "quoteBlock" && <QuoteBlock quote={block.quote} />}
-            {block._type === "imageBlock" && <ImageBlock image={block.image} />}
+    </section>
+    <section class="content">
+      <div class="page__content">
+        {
+          page.content.map((block) => (
+            <>
+              {block._type === "textBlock" && (
+                <TextBlock textItems={block.textItems} />
+              )}
+              {block._type === "quoteBlock" && (
+                <QuoteBlock quote={block.quote} />
+              )}
+              {block._type === "imageBlock" && (
+                <ImageBlock image={block.image} />
+              )}
 
-            {/* Uncomment and add other blocks as you implement them */}
-            {/* {block._type === "imageBlock" && <ImageBlock image={block.image} />}
+              {/* Uncomment and add other blocks as you implement them */}
+              {/* {block._type === "imageBlock" && <ImageBlock image={block.image} />}
          
           {block._type === "textImageBlock" && <TextImageBlock {...block} />}
           {block._type === "videoBlock" && <VideoBlock videoUrl={block.videoUrl} />} */}
-          </>
-        ))
-      }
-    </div>
-  </section>
+            </>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </Layout>
 
 <style>
+  .container {
+    margin: 20vh 0 0 0;
+  }
   .page__hero {
     width: 100%;
-    margin: var(--space-1) 0 var(--space-4);
+
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -86,6 +95,7 @@ const page: {
     }
     p:first-child {
       font-size: 3rem;
+      line-height: 100%;
     }
 
     p:last-child {

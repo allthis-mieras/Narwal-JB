@@ -35,7 +35,8 @@
     "react-dom": "^18.3.1",
     "sanity": "3.48.1",
     "sanity-plugin-iframe-pane": "^3.1.6",
-    "swiper": "^11.1.11"
+    "swiper": "^11.1.11",
+    "utopia-core-scss": "^1.1.0"
   },
   "devDependencies": {
     "@portabletext/types": "2.0.13",

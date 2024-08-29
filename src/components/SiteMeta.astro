@@ -1,0 +1,35 @@
+---
+import { ViewTransitions } from "astro:transitions";
+const { title, description, url, image, author } = Astro.props;
+
+let subtitle = "Jacques Buith";
+---
+
+<!-- general meta -->
+<meta name="title" content={`${title} - ${subtitle}`} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+
+<!-- open graph -->
+<meta property="og:title" content={`${title} - ${subtitle}`} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={url} />
+<meta
+  property="og:image"
+  content={Astro.site ? `${Astro.site}${image}` : image}
+/>
+
+<!-- twitter card -->
+
+<!-- page title -->
+<title>{subtitle} • {title}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap"
+  rel="stylesheet"
+/>
+
+<ViewTransitions />
