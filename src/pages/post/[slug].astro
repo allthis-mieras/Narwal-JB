@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 
 import type { InferGetStaticParamsType } from "astro";
-
+import { Image } from "astro:assets";
 import { PortableText } from "astro-portabletext";
 import { formatDate } from "../../utils";
 import { getPost, getPosts } from "../../utils/sanity";
@@ -38,6 +38,8 @@ export interface ImageAsset {
   };
 }
 
+const imageUrl = urlFor(post.mainImage.asset).url();
+
 console.log("post image:", post.mainImage);
 ---
 
@@ -64,10 +66,13 @@ console.log("post image:", post.mainImage);
 
     {
       post.mainImage && (
-        <img
-          class="post__cover"
-          src={urlFor(post.mainImage.asset).url()}
+        <Image
+          src={imageUrl}
+          widths={[240, 540, 720, 1080]}
+          inferSize
+          sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
           alt="Cover image"
+          class="post__cover"
         />
       )
     }

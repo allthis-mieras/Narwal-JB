@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
 import TextBlock from "../components/sectionBlocks/TextBlock.astro";
 import ImageBlock from "../components/sectionBlocks/ImageBlock.astro";
 import QuoteBlock from "../components/sectionBlocks/QuoteBlock.astro";
@@ -15,17 +17,26 @@ const page: {
   pageText?: any;
   content: any[];
 } = await getAboutPage();
+
+const imageUrl = urlFor(page.heroImage).url();
 ---
 
 <Layout title={page.title ?? ""}>
   <div class="container stretch">
     <h1>{page.title}</h1>
     <section class="page__hero">
-      <img
-        class="page__cover"
-        src={urlFor(page.heroImage ?? {}).url()}
-        alt="Cover image"
-      />
+      {
+        page.heroImage && (
+          <Image
+            src={imageUrl}
+            widths={[240, 540, 720, 1080]}
+            inferSize
+            sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
+            alt="Image"
+            class="page__cover"
+          />
+        )
+      }
 
       <div class="page__content">
         <div class="page__text">

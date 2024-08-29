@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { urlFor } from "../utils/image";
 
 interface Button {
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const { text, button, image }: Props = Astro.props;
-
+const imageUrl = urlFor(image.asset.url ?? {}).url();
 // console.log("Highlight image:", image.asset.url);
 ---
 
@@ -22,11 +23,19 @@ const { text, button, image }: Props = Astro.props;
     <p>{text}</p>
     <a href={button.url} class="button">{button.label}</a>
   </div>
-  <img
-    src={urlFor(image.asset.url ?? {}).url()}
-    alt="Feature image"
-    class="feature__image"
-  />
+
+  {
+    image.asset.url && (
+      <Image
+        src={imageUrl}
+        inferSize
+        widths={[240, 540, 720, 1080]}
+        sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
+        alt="Image"
+        class="feature__image"
+      />
+    )
+  }
 </section>
 
 <style>

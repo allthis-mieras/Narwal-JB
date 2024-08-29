@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { urlFor } from "../../utils/image";
+
 const { image } = Astro.props;
 const imageUrl = image?.asset ? urlFor(image.asset).url() : "";
 
@@ -9,6 +11,17 @@ const imageUrl = image?.asset ? urlFor(image.asset).url() : "";
 {
   imageUrl && (
     <div class="image-block">
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          inferSize
+          widths={[240, 540, 720, 1080]}
+          sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
+          alt="Cover image"
+          class="post__cover"
+        />
+      )}
+
       <img src={imageUrl} alt={image.alt ?? "Image"} />
       {image.caption && <p class="caption">{image.caption}</p>}
     </div>
