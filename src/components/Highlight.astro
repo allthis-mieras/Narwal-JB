@@ -14,6 +14,8 @@ interface Props {
 }
 
 const { text, button, image }: Props = Astro.props;
+
+console.log("Highlight image:", image);
 ---
 
 <section class="feature">
@@ -22,7 +24,7 @@ const { text, button, image }: Props = Astro.props;
     <a href={button.url} class="button">{button.label}</a>
   </div>
   <img
-    src={urlFor(image.asset ?? {}).url()}
+    src={urlFor(image ?? {}).url()}
     alt="Feature image"
     class="feature__image"
   />
