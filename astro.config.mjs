@@ -28,6 +28,9 @@ export default defineConfig({
   adapter: netlify({
     imageCDN: true,
   }),
+  image: {
+      domains: ['sanity.io'],
+    },
   integrations: [sanity({
     projectId,
     dataset,
