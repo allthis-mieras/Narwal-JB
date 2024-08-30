@@ -28,7 +28,9 @@ export default defineConfig({
   // Hybrid+adapter is required to support embedded Sanity Studio
   // output: "hybrid",
   output: 'server',
-  adapter: netlify(),
+  adapter: netlify({
+    imageCDN: false,
+  }),
   integrations: [sanity({
     projectId,
     dataset,
