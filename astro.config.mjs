@@ -30,7 +30,12 @@ export default defineConfig({
   }),
   image: {
       domains: ['sanity.io'],
+      remotePatterns: [{
+      protocol: 'https',
+      hostname: '**.sanity.io',
+    }],
     },
+    
   integrations: [sanity({
     projectId,
     dataset,
