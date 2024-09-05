@@ -24,18 +24,23 @@ console.log("About page:", imageUrl);
 ---
 
 <Layout title={page.title ?? ""}>
-  <section>
-    <div class="container">
+  <div class="container">
+    <section>
       <div class="page__title">
         <h1>{page.title}</h1>
       </div>
-      <section class="page__hero">
+      <div class="page__hero">
+        <div class="page__content">
+          <div class="page__text">
+            <PortableText value={page.pageText} />
+          </div>
+        </div>
         {
           page.heroImage && (
             <div class="page__cover">
               <Image
                 src={imageUrl}
-                widths={[240, 540, 720, 1080]}
+                widths={[480, 960, 1440, 1920, 2560]}
                 inferSize
                 sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
                 alt="Image"
@@ -44,57 +49,39 @@ console.log("About page:", imageUrl);
             </div>
           )
         }
+      </div>
 
-        <div class="page__content">
-          <div class="page__text">
-            <PortableText value={page.pageText} />
-          </div>
-        </div>
-      </section>
-      <section class="content">
-        <div class="page__content">
-          {
-            page.content.map((block) => (
-              <>
-                {block._type === "textBlock" && (
-                  <TextBlock title={block.title} textItems={block.textItems} />
-                )}
-                {block._type === "quoteBlock" && (
-                  <QuoteBlock quote={block.quote} />
-                )}
-                {block._type === "imageBlock" && (
-                  <ImageBlock image={block.image} />
-                )}
+      <div class="page__content">
+        {
+          page.content.map((block) => (
+            <>
+              {block._type === "textBlock" && (
+                <TextBlock title={block.title} textItems={block.textItems} />
+              )}
+              {block._type === "quoteBlock" && (
+                <QuoteBlock quote={block.quote} />
+              )}
+              {block._type === "imageBlock" && (
+                <ImageBlock image={block.image} />
+              )}
 
-                {/* Uncomment and add other blocks as you implement them */}
-                {/* {block._type === "imageBlock" && <ImageBlock image={block.image} />}
+              {/* Uncomment and add other blocks as you implement them */}
+              {/* {block._type === "imageBlock" && <ImageBlock image={block.image} />}
          
           {block._type === "textImageBlock" && <TextImageBlock {...block} />}
           {block._type === "videoBlock" && <VideoBlock videoUrl={block.videoUrl} />} */}
-              </>
-            ))
-          }
-        </div>
-      </section>
-    </div>
-  </section>
+            </>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </Layout>
+
 <style>
-  * {
+  /* * {
     border: 1px solid red;
-  }
-
-  .page__title {
-    padding: var(--space-2xl) 0;
-    font-weight: 400;
-    margin-top: var(--space-3xl);
-  }
-
-  h1 {
-    font-family: var(--font-family-serif);
-    font-size: var(--fontsize-8);
-    line-height: 100%;
-  }
+  } */
 
   .page__hero {
     width: 100%;
@@ -102,6 +89,10 @@ console.log("About page:", imageUrl);
     gap: var(--space-xl);
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   }
+  .page__content {
+    order: 2;
+  }
+
   .page__cover,
   .page__cover--none {
     width: 100%;
@@ -138,17 +129,21 @@ console.log("About page:", imageUrl);
     }
   }
 
-  @media (min-width: 575px) {
+  @media (min-width: 896px) {
     .page__container {
       width: 100%;
       margin: var(--space-1) 0 var(--space-4);
       display: grid;
 
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
 
-      & .page__cover {
-        order: 2;
-      }
+    .page__cover {
+      order: 2;
+    }
+
+    .page__content {
+      order: 1;
     }
   }
 </style>

@@ -89,4 +89,18 @@ body .pagination a {
       stroke: white;
     }
   }
+
+}
+
+.page__title {
+  padding: var(--space-2xl) 0;
+  font-weight: 400;
+  margin-top: var(--space-3xl);
+
+  & h1,
+  & h2 {
+    font-family: var(--font-family-serif);
+    font-size: var(--fontsize-8);
+    line-height: 100%;
+  }
 }

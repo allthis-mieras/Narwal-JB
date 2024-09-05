@@ -7,16 +7,25 @@ const posts = await getPosts();
 ---
 
 <Layout title="Articles">
-  <section>
-    {posts.length ? posts.map((post) => <Card post={post} />) : <p>no posts</p>}
-  </section>
-
-  <style>
-    section {
-      padding: var(--space-8) 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-  </style>
+  <div class="container stretch">
+    <div class="page__title">
+      <h1>Articles</h1>
+    </div>
+    <section class="">
+      {
+        posts.length ? (
+          posts.map((post) => <Card post={post} />)
+        ) : (
+          <p>no posts</p>
+        )
+      }
+    </section>
+  </div>
 </Layout>
+<style>
+  section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>

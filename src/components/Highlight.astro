@@ -16,6 +16,7 @@ interface Props {
 const { text, button, image }: Props = Astro.props;
 const imageUrl = urlFor(image.asset.url ?? {}).url();
 // console.log("Highlight image:", image.asset.url);
+console.log("text", text, "button", button, "image", image);
 ---
 
 <section class="feature">

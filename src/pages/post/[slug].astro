@@ -46,48 +46,63 @@ console.log("post image:", post.mainImage);
 ---
 
 <Layout title={post.title!}>
-  <section class="container stretch page post">
-    <div class="container">
-      <p class="post__date">
-        {formatDate(post._createdAt)}
-      </p>
-      <h1 class="post__title">{post.title}</h1>
-      <p class="post__excerpt">{post.excerpt}</p>
+  <section class="container stretch">
+    <h3 class="page__title">Articles</h3>
 
+    <div class="post__wrapper">
       <div class="post__content">
-        <PortableText value={post.body} />
+        <p class="post__cat">{post.category}</p>
+        <h1 class="post__title">{post.title}</h1>
+        <p class="post__date">
+          {formatDate(post._createdAt)}
+        </p>
+        <p class="post__excerpt">{post.excerpt}</p>
+        <div class="post__content">
+          <PortableText value={post.body} />
+        </div>
+        {
+          post.url && (
+            <a href={post.url} class="card__url" target="_blank">
+              {domain}
+            </a>
+          )
+        }
       </div>
       {
-        post.url && (
-          <a href={post.url} class="card__url" target="_blank">
-            {domain}
-          </a>
+        post.mainImage ? (
+          <Image
+            src={imageUrl}
+            widths={[240, 540, 720, 1080]}
+            inferSize
+            sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
+            alt="Cover image"
+            class="post__cover"
+          />
+        ) : (
+          <div class="post__cover--none" />
         )
       }
     </div>
-
-    {
-      post.mainImage && (
-        <Image
-          src={imageUrl}
-          widths={[240, 540, 720, 1080]}
-          inferSize
-          sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
-          alt="Cover image"
-          class="post__cover"
-        />
-      )
-    }
   </section>
 </Layout>
 
 <style>
-  .post {
+  .page__title {
+    font-family: var(--font-family-serif);
+    font-size: var(--fontsize-0);
+    font-weight: 700;
+  }
+
+  .post__wrapper {
     width: 100%;
     margin: var(--space-1) 0 var(--space-4);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 1rem;
+    gap: var(--space-2xl);
+  }
+
+  .post__content {
+    order: 2;
   }
 
   .post__cover,
@@ -95,73 +110,84 @@ console.log("post image:", post.mainImage);
     width: 100%;
     height: auto;
     object-fit: cover;
+
+    top: 0;
+    order: 1;
   }
 
   .post__cover--none {
     background: var(--black);
   }
 
-  .post__content {
-    font-family: var(--font-family-serif);
-    font-weight: 400;
-    font-size: var(--font-size-4);
-    line-height: var(--line-height-5);
-    letter-spacing: -0.02em;
-    margin-top: var(--space-6);
+  .post__cat {
+    font-family: var(--font-family-sans);
+    font-size: var(--fontsize-1);
+    font-weight: 600;
+    color: #ccc;
   }
 
   .post__title {
     font-family: var(--font-family-sans);
-    font-size: var(--font-size-7);
-    line-height: var(--line-height-6);
-    margin: var(--space-4) 0;
-    font-weight: 800;
+    font-size: var(--fontsize-6);
+
+    font-weight: 400;
+    margin-top: var(--space-6xl);
+    margin-bottom: var(--space-s) !important;
+  }
+
+  .post__date {
+    font-weight: 400;
+    font-family: var(--font-family-sans);
+    font-size: var(--fontsize--2);
+
+    margin-top: var(--space-4);
   }
 
   .post__excerpt {
-    font-family: var(--font-family-serif);
-    font-size: var(--font-size-5);
-    line-height: var(--line-height-4);
+    font-family: var(--font-family-sans);
+    font-size: var(--fontsize-5);
+
     margin-top: 0;
     font-weight: 400;
   }
 
-  .post__date {
+  .post__content {
     font-family: var(--font-family-sans);
-    font-weight: 600;
-    font-size: var(--font-size-1);
-    line-height: var(--line-height-1);
-    margin-top: var(--space-4);
+    font-weight: 400;
+    font-size: var(--fontsize-2);
+
+    letter-spacing: -0.02em;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 906px) {
     .post__cover,
     .post__cover--none {
       width: 100%;
+      order: 2;
+      position: sticky;
     }
 
     .post__title {
-      font-size: var(--font-size-10);
-      line-height: var(--line-height-10);
-      margin: var(--space-6) 0 0;
+      font-size: var(--fontsize-6);
+      margin: var(--space-1xl) 0;
       letter-spacing: -0.025em;
-    }
-
-    .post__excerpt {
-      font-size: var(--font-size-5);
-      line-height: var(--line-height-5);
-      margin-top: var(--space-3);
-      margin-bottom: var(--space-3);
     }
 
     .post__date {
       font-size: var(--font-size-3);
-      line-height: var(--line-height-2);
       margin-top: var(--space-0);
     }
 
+    .post__excerpt {
+      font-size: var(--fontsize-2);
+      line-height: 112.5%;
+      margin-top: var(--space-l);
+      margin-bottom: var(--space-m);
+    }
+
     .post__content {
-      margin-top: var(--space-7);
+      margin-bottom: var(--space-1xs);
+      font-size: var(--fontsize-1);
     }
   }
 </style>

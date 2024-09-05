@@ -110,63 +110,75 @@ body {
   }
 
   h1 {
-    font-size: 2.25rem;
-    line-height: 3.375rem;
+    font-size: var(--fontsize-6);
+    line-height: 100%;
 
     @include breakpoint(medium) {
-      font-size: 3rem;
-      line-height: 3.625rem;
+      font-size: var(--fontsize-5);
+      line-height: 100%;
     }
   }
 
   h2 {
-    font-size: 1.875rem;
-    line-height: 2.8125rem;
+    font-size: var(--fontsize-5);
+    line-height: 112.5%;
 
     @include breakpoint(medium) {
-      font-size: 2.25rem;
-      line-height: 3.375rem;
+      font-size: var(--fontsize-4);
+      line-height: 100%;
+
     }
   }
 
   h3 {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
+    font-size: var(--fontsize-4);
+    line-height: 120%;
 
     @include breakpoint(medium) {
-      font-size: 1.875rem;
-      line-height: 2.8125rem;
+      font-size: var(--fontsize-3);
+      line-height: 120%;
     }
   }
 
   h4 {
-    font-size: 1.25rem;
-    line-height: 1.875rem;
+    font-size: var(--fontsize-3);
+    line-height: 120%;
 
     @include breakpoint(medium) {
-      font-size: 1.5rem;
-      line-height: 2.25rem;
+      font-size: var(--fontsize-2);
+      line-height: 120%;
     }
   }
 
   h5 {
-    font-size: 1.125rem;
-    line-height: 1.6875rem;
+    font-size: var(--fontsize-2);
+    line-height: 120%;
 
     @include breakpoint(medium) {
-      font-size: 1.25rem;
-      line-height: 1.875rem;
+      font-size: var(--fontsize-1);
+      line-height: 120%;
 
       h6 {
-        font-size: 1rem;
+        font-size: var(--fontsize-0);
       }
     }
 
-    line-height: 1.5rem;
+    line-height: 150%;
 
     @include breakpoint(medium) {
-      font-size: 1.125rem;
-      line-height: 1.6875rem;
+      font-size: var(--fontsize-2);
+      line-height: 133%;
     }
   }
+
+  p {
+    font-size: var(--fontsize-1);
+    line-height: 133%;
+    margin-block: var(--space-xs);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
 }

@@ -20,12 +20,13 @@ const { title, textItems } = Astro.props;
 
 <style>
   .text-block {
-    margin: var(--space-2xl) 0;
+    padding: var(--space-3xl) 0;
   }
 
   .text-block-title {
-    font-size: var(--fontsize-4);
+    font-size: var(--fontsize-6);
     font-weight: 400;
+    line-height: 112.5%;
     margin-bottom: var(--space-xl);
   }
 
@@ -38,6 +39,7 @@ const { title, textItems } = Astro.props;
   .column:first-child p:first-child {
     font-size: var(--fontsize-3);
     line-height: 112.5%;
+    color: red;
     margin-bottom: var(--space-m);
   }
 
@@ -46,5 +48,9 @@ const { title, textItems } = Astro.props;
     flex-direction: column;
     font-size: var(--fontsize-0);
     line-height: 133%;
+  }
+
+  :global(.column:first-child p:first-child) {
+    color: red;
   }
 </style>

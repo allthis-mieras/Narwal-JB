@@ -12,6 +12,8 @@ export default defineType({
       options: {
         hotspot: true, // Voor betere controle over het focuspunt van afbeeldingen
       },
+      
+      
     }),
     defineField({
       name: 'alt',

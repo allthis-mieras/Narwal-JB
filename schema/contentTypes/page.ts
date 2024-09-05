@@ -38,23 +38,19 @@ export default defineType({
         ],
         layout: "dropdown",
       },
-      validation: (Rule) =>
-  Rule.required().custom(async (value, context) => {
-    console.log("Document ID:", context.document?._id); // Check if the ID is available
-
-    if (value === "homepage") {
-      const existingHomepage = await client.fetch(
-        `*[_type == "page" && type == "homepage" && !(_id in path("drafts.**")) && _id != $id][0]`,
-        { id: context.document?._id }
-      );
-
-      if (existingHomepage) {
-        return "Er kan maar één gepubliceerde homepage zijn.";
-      }
-    }
-
-    return true;
-  }),
+  //     validation: (Rule) =>
+  // Rule.required().custom(async (value, context) => {
+  //   if (value === "homepage") {
+  //     const existingHomepage = await client.fetch(
+  //       `*[_type == "page" && type == "homepage" && !(_id in path("drafts.**")) && _id != $id][0]`,
+  //       { id: context.document?._id }
+  //     );
+  //     if (existingHomepage) {
+  //       return "Er kan maar één gepubliceerde homepage zijn.";
+  //     }
+  //   }
+  //   return true;
+  // }),
     }),
     // Fields only for the homepage
     defineField({
@@ -97,7 +93,7 @@ export default defineType({
       type: "object",
       fields: [
         {
-          name: "highlightText",
+          name: "text",
           title: "Text",
           type: "string",
         },
