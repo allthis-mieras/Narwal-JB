@@ -25,7 +25,7 @@ const { slides }: Props = Astro.props;
           //   console.log("index:", index);
 
           return (
-            <div class="swiper-slide" key={index}>
+            <div class="swiper-slide">
               <Image
                 src={imageUrl}
                 widths={[480, 960, 1440, 1920, 2560]}
@@ -35,7 +35,7 @@ const { slides }: Props = Astro.props;
                 class="page__cover"
               />
 
-              {slide.caption && <p class="swiper-caption">{slide.caption}</p>}
+              {/* {slide.caption && <p class="swiper-caption">{slide.caption}</p>} */}
             </div>
           );
         })
