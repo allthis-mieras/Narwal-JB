@@ -46,8 +46,8 @@ console.log("post image:", post.mainImage);
 ---
 
 <Layout title={post.title!}>
-  <section class="post">
-    <div class="post__container">
+  <section class="container stretch page post">
+    <div class="container">
       <p class="post__date">
         {formatDate(post._createdAt)}
       </p>
@@ -99,10 +99,6 @@ console.log("post image:", post.mainImage);
 
   .post__cover--none {
     background: var(--black);
-  }
-
-  .post__container {
-    padding: 0 var(--space-3);
   }
 
   .post__content {

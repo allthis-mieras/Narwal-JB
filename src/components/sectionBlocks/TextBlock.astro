@@ -1,10 +1,12 @@
 ---
 import { PortableText } from "astro-portabletext";
 
-const { textItems } = Astro.props;
+const { title, textItems } = Astro.props;
 ---
 
 <div class="text-block">
+  {title && <h2 class="text-block-title">{title}</h2>}
+  <!-- Render title if available -->
   <div class={`columns columns-${textItems.length}`}>
     {
       textItems.map((textItem: any) => (
@@ -18,17 +20,31 @@ const { textItems } = Astro.props;
 
 <style>
   .text-block {
-    margin: var(--space-4) 0;
+    margin: var(--space-2xl) 0;
+  }
+
+  .text-block-title {
+    font-size: var(--fontsize-4);
+    font-weight: 400;
+    margin-bottom: var(--space-xl);
   }
 
   .columns {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-4);
+    gap: var(--space-xl);
+  }
+
+  .column:first-child p:first-child {
+    font-size: var(--fontsize-3);
+    line-height: 112.5%;
+    margin-bottom: var(--space-m);
   }
 
   .column {
     display: flex;
     flex-direction: column;
+    font-size: var(--fontsize-0);
+    line-height: 133%;
   }
 </style>

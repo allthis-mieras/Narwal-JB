@@ -44,8 +44,8 @@ const imageUrl = urlFor(image.asset.url ?? {}).url();
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 2rem;
-    height: 100vh; /* Zorg ervoor dat de sectie de volledige hoogte van het scherm beslaat */
+
+    height: 100vh;
     overflow: hidden;
   }
 
@@ -59,9 +59,10 @@ const imageUrl = urlFor(image.asset.url ?? {}).url();
   }
 
   .feature__inner p {
-    font-size: 3rem; /* Pas dit aan om de grootte van de tekst te regelen */
-    font-weight: bold;
-    line-height: 1.2;
+    font-size: var(--fontsize-4);
+    font-weight: 100;
+    line-height: 112.5%;
+    text-wrap:;
     margin-bottom: 1rem;
   }
 
@@ -75,6 +76,7 @@ const imageUrl = urlFor(image.asset.url ?? {}).url();
     font-size: 1rem;
     font-weight: 600;
     transition: background-color 0.3s;
+    border: none;
   }
 
   .feature__inner .button:hover {

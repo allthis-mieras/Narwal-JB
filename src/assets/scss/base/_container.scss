@@ -10,12 +10,12 @@
   max-width: 100%;
 
   @include breakpoint(medium) {
-    padding: 0 var(--space-xs);
+    padding: 0 var(--space-s);
   }
 
   @include breakpoint(large) {
-    padding: 0 calc(2rem / 2);
-    max-width: 1200px;
+    padding: 0 var(--space-l);
+    max-width: 1920px;
   }
 
   &.stretch {

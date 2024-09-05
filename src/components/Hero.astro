@@ -1,6 +1,6 @@
 ---
-import SwiperJSComponent from "./SwiperJSComponent.jsx";
 import type { Slide } from "../utils/sanity";
+import SwiperJS from "./SwiperJS.astro";
 
 interface Props {
   heroText: string;
@@ -9,15 +9,14 @@ interface Props {
 
 const { heroText, heroSlides }: Props = Astro.props;
 
-// console.log("Hero Slides:", heroSlides);
+console.log("Hero Slides:", heroSlides);
 ---
 
 <section class="hero">
+  <SwiperJS slides={heroSlides} />
   <div class="hero-text">
-    <h1>{heroText}</h1>
+    <h1 class="hero-title">{heroText}</h1>
   </div>
-
-  <SwiperJSComponent slides={heroSlides} />
 </section>
 
 <style>
@@ -38,8 +37,17 @@ const { heroText, heroSlides }: Props = Astro.props;
     z-index: 10;
     color: white;
     text-align: center;
-    font-size: 2rem;
     padding: 1rem;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .hero-title {
+    font-size: var(--fontsize-6);
+    font-weight: 100;
+    line-height: 100%;
+    text-wrap: balance;
+    color: white;
   }
   :global(.swiper) {
     width: 100%;
@@ -50,8 +58,6 @@ const { heroText, heroSlides }: Props = Astro.props;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    background: #fff;
   }
 
   :global(.slide-image) {
