@@ -14,8 +14,8 @@ console.log("Hello, this is the image:", image);
       {imageUrl && (
         <Image
           src={imageUrl}
-          widths={[480, 960, 1440, 1920, 2560]}
           inferSize
+          widths={[480, 960, 1440, 1920, 2560]}
           sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1080px) 720px, 1080px"
           alt={image.alt ?? "Image"}
           class="post__cover"

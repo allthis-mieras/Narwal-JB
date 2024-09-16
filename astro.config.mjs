@@ -50,7 +50,7 @@ export default defineConfig({
   }), react() // Required for Sanity Studio
   ]
 });
-
+  
 
 import { createClient } from "@sanity/client";
 
