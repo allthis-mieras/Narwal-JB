@@ -11,7 +11,7 @@ const posts = await getPosts();
     <div class="page__title">
       <h1><a href="../articles" transition:name="pagetitle">Articles</a></h1>
     </div>
-    <section class="">
+    <section class="post__items">
       {
         posts.length ? (
           posts.map((post) => (
@@ -30,9 +30,9 @@ const posts = await getPosts();
     color: inherit;
   }
 
-  section {
+  .post__items {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    gap: var(--gap-default);
   }
 </style>

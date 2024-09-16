@@ -20,7 +20,7 @@
     Arial,
     sans-serif;
   --font-family-default: 'Inter', sans-serif, var(--font-system);
-  --font-family-serif: "Playfair Display", var(--font-system-serif),
+  --font-family-serif: "PT Serif", "Playfair Display", var(--font-system-serif),
     serif;
   --font-family-mono: ui-monospace,
     'Cascadia Code',
@@ -37,8 +37,6 @@
   --background: var(--neutral-100);
   --primary-background: var(--primary-100);
   --neutral-background: var(--neutral-200);
-
-
 }
 
 // dark color scheme overrides

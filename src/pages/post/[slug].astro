@@ -53,7 +53,7 @@ console.log("post image:", post.mainImage);
     </div>
 
     <div class="post__wrapper">
-      <div class="post__content" transition:name="pagecontent">
+      <div class="post__content">
         <h1 class="post__title">{post.title}</h1>
         <div class="post__meta">
           <p class="post__cat">{post.category}</p>
@@ -104,6 +104,12 @@ console.log("post image:", post.mainImage);
     font-family: var(--font-family-serif);
     font-size: var(--fontsize-0);
     font-weight: 700;
+    padding: var(--space-2xl) 0 var(--space-xs) 0;
+  }
+
+  .page__title a {
+    color: var(--neutral-400);
+    text-decoration: none;
   }
 
   .post__wrapper {
@@ -111,52 +117,50 @@ console.log("post image:", post.mainImage);
     margin: var(--space-1) 0 var(--space-4);
     padding-bottom: 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: var(--space-2xl);
   }
 
   .post__content {
     order: 2;
   }
 
+  .post__title {
+    font-family: var(--font-family-serif);
+    font-size: var(--fontsize-9);
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-2xs);
+  }
+
   .post__meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: var(--space-1);
     color: var(--neutral-600);
   }
 
-  .post__cat {
-    font-family: var(--font-family-sans);
-    font-size: var(--fontsize--2);
-    font-weight: 600;
-  }
-
+  .post__cat,
   .post__date {
     font-family: var(--font-family-sans);
     font-size: var(--fontsize--2);
-    font-weight: 500;
+    font-weight: 600;
+    margin: 0;
   }
 
-  .post__title {
-    font-family: var(--font-family-serif);
-    font-size: var(--fontsize-6);
-    font-weight: 400;
-    margin-top: var(--space-6xl);
-    margin-bottom: var(--space-s) !important;
+  .post__date {
+    font-weight: 500;
+    color: var(--neutral-500);
   }
 
   .post__excerpt {
     font-family: var(--font-family-sans);
-    font-size: var(--fontsize-5);
-    font-weight: 400;
+    font-size: var(--fontsize-3);
+    font-weight: 600;
   }
 
   .post__content {
     font-family: var(--font-family-sans);
     font-weight: 400;
-    font-size: var(--fontsize-2);
+    /* font-size: var(--fontsize-2); */
 
     letter-spacing: -0.02em;
   }
@@ -178,25 +182,33 @@ console.log("post image:", post.mainImage);
   .post__cover,
   .post__cover--none {
     width: 100%;
-    height: 80vh;
+    height: auto;
     object-fit: cover;
-    /* aspect-ratio: 3 / 4; */
-    top: 0;
+    aspect-ratio: 1 / 1;
     order: 1;
+    border-radius: var(--radius-default);
   }
 
   .post__cover--none {
     background: var(--neutral-background);
+    display: none;
   }
 
   @media (min-width: 906px) {
+    .post__wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-2xl);
+    }
     .post__cover,
     .post__cover--none {
+      display: block;
       width: 100%;
+      height: 80vh;
       order: 2;
+
       position: sticky;
       top: 10vh;
-      border-radius: var(--radius-default);
     }
 
     .post__title {
@@ -216,7 +228,7 @@ console.log("post image:", post.mainImage);
 
     .post__content {
       margin-bottom: var(--space-1xs);
-      font-size: var(--fontsize-1);
+      font-size: var(--fontsize-0);
       margin-bottom: var(--space-xl);
     }
   }

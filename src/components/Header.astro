@@ -21,21 +21,20 @@ import Nav from "../components/Nav.astro";
 
   .container {
     display: flex;
-    background: rgba(255, 255, 255, 0.4);
-    padding: var(--space-3xs) var(--space-2xs);
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--space-xs) var(--space-s);
     justify-content: space-between;
     align-items: center;
 
     border-radius: 100vw;
 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(1vw);
 
     & .header__title {
-      font-weight: 800;
-      font-size: var(--font-size-3);
-      line-height: var(--line-height-1);
-      padding-left: var(--space-2);
-      margin: var(--space-3) 0;
+      font-weight: 600;
+      font-size: var(--fontsize--1);
+      line-height: 100%;
+
       text-decoration: none;
       color: var(--black);
     }

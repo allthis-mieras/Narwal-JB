@@ -14,12 +14,12 @@ ol:not([class]) {
   }
 
   li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 }
 
 ul:not([class]) {
-  > li::marker {
+  >li::marker {
     display: block;
     color: var(--primary-800);
   }
@@ -39,7 +39,7 @@ ol.incremented {
 
   li {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 
     @include breakpoint(medium) {
       margin-bottom: 0.75rem;

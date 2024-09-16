@@ -4,32 +4,32 @@
 
 @use 'breakpoint' as *;
 
-@font-face {
-  font-family: 'DM Mono';
-  src: local('DM Mono Medium'), local('DMMono-Medium'), url('/fonts/DMMono-Medium.woff2') format('woff2'),
-    url('/fonts/DMMono-Medium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+// @font-face {
+//   font-family: 'DM Mono';
+//   src: local('DM Mono Medium'), local('DMMono-Medium'), url('/fonts/DMMono-Medium.woff2') format('woff2'),
+//     url('/fonts/DMMono-Medium.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+//   font-display: swap;
+// }
 
-@font-face {
-  font-family: 'Alte Haas';
-  src: local('Alte Haas Regular'), local('AlteHaasGroteskRegular'), url('/fonts/AlteHaasGroteskRegular.woff2') format('woff2'),
-    url('/fonts/AlteHaasGroteskRegular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+// @font-face {
+//   font-family: 'Alte Haas';
+//   src: local('Alte Haas Regular'), local('AlteHaasGroteskRegular'), url('/fonts/AlteHaasGroteskRegular.woff2') format('woff2'),
+//     url('/fonts/AlteHaasGroteskRegular.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+//   font-display: swap;
+// }
 
-@font-face {
-  font-family: 'Alte Haas';
-  src: local('Alte Haas Bold'), local('AlteHaasGroteskBold'), url('/fonts/AlteHaasGroteskBold.woff2') format('woff2'),
-    url('/fonts/AlteHaasGroteskBold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
+// @font-face {
+//   font-family: 'Alte Haas';
+//   src: local('Alte Haas Bold'), local('AlteHaasGroteskBold'), url('/fonts/AlteHaasGroteskBold.woff2') format('woff2'),
+//     url('/fonts/AlteHaasGroteskBold.woff') format('woff');
+//   font-weight: bold;
+//   font-style: normal;
+//   font-display: swap;
+// }
 
 // @font-face {
 //   font-family: 'Alte Haas Sans';
@@ -122,6 +122,7 @@ body {
   h2 {
     font-size: var(--fontsize-5);
     line-height: 112.5%;
+    margin-top: 1em;
 
     @include breakpoint(medium) {
       font-size: var(--fontsize-4);
@@ -133,6 +134,7 @@ body {
   h3 {
     font-size: var(--fontsize-4);
     line-height: 120%;
+    margin-top: 1em;
 
     @include breakpoint(medium) {
       font-size: var(--fontsize-3);
@@ -143,6 +145,7 @@ body {
   h4 {
     font-size: var(--fontsize-3);
     line-height: 120%;
+    margin-top: 0.5em;
 
     @include breakpoint(medium) {
       font-size: var(--fontsize-2);
@@ -153,6 +156,7 @@ body {
   h5 {
     font-size: var(--fontsize-2);
     line-height: 120%;
+    margin-top: 0.5em;
 
     @include breakpoint(medium) {
       font-size: var(--fontsize-1);
@@ -172,7 +176,7 @@ body {
   }
 
   p {
-    font-size: var(--fontsize-1);
+    font-size: var(--fontsize-0);
     line-height: 133%;
     margin-block: var(--space-xs);
 

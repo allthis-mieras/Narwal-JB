@@ -67,12 +67,10 @@ const domain = post.url ? extractDomain(post.url) : "";
   .card {
     display: flex;
     flex-direction: row;
-    padding: var(--space-2);
-    padding: 1rem;
+    padding: var(--space-s) var(--space-s) var(--space-s) var(--space-s);
     position: relative;
-    /* border-bottom: 1px solid #ced2d9; */
-    min-height: 400px;
-    border-radius: 1rem;
+    min-height: calc(10vw + 16rem);
+    border-radius: var(--radius-default);
     overflow: hidden;
     transition:
       transform 0.2s,
@@ -131,7 +129,7 @@ const domain = post.url ? extractDomain(post.url) : "";
     }
 
     & .card__cat {
-      font-size: var(--font-size-1);
+      font-size: var(--fontsize--2);
       z-index: 10;
       pointer-events: none;
     }
@@ -141,10 +139,10 @@ const domain = post.url ? extractDomain(post.url) : "";
     }
 
     & .card__title {
-      font-family: var(--font-family-sans);
-      font-weight: 300;
-      font-size: var(--font-size-6);
-      line-height: var(--line-height-6);
+      font-family: var(--font-family-system);
+      font-weight: 500;
+      font-size: var(--fontsize-1);
+      line-height: 112.5%;
       letter-spacing: -0.025em;
       margin: var(--space-3) 0;
     }
@@ -152,8 +150,9 @@ const domain = post.url ? extractDomain(post.url) : "";
     & .card__excerpt {
       font-family: var(--font-family-sans);
       font-weight: 400;
-      font-size: var(--font-size-1);
-      line-height: var(--line-height-1);
+      font-size: var(--fontsize--2);
+      line-height: 133%;
+      color: var(--neutral-600);
       margin-top: 0;
 
       /* truncate */
@@ -180,8 +179,8 @@ const domain = post.url ? extractDomain(post.url) : "";
       & .card__date {
         font-weight: 400;
         font-family: var(--font-family-sans);
-        font-size: var(--font-size-0);
-        margin-top: calc(var(----space-4) + 7);
+        font-size: var(--fontsize--2);
+        color: var(--neutral-600);
       }
 
       & .card__url {
@@ -190,9 +189,9 @@ const domain = post.url ? extractDomain(post.url) : "";
         text-decoration: none;
         border-radius: 100vw;
         z-index: 10;
-        background-color: yellow;
+        background-color: var(--neutral-300);
         pointer-events: all;
-        font-size: var(--font-size-0);
+        font-size: var(--fontsize--2);
 
         &:hover {
           opacity: 0.8;
@@ -257,6 +256,7 @@ const domain = post.url ? extractDomain(post.url) : "";
   @media (min-width: 800px) {
     .card {
       flex-direction: row;
+      min-height: calc(10vw + 12rem);
 
       & .card__container {
         margin: 0 var(--space-2) 0;

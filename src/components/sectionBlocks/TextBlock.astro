@@ -24,7 +24,7 @@ const { title, textItems } = Astro.props;
   }
 
   .text-block-title {
-    font-size: var(--fontsize-6);
+    font-size: var(--fontsize-4);
     font-weight: 400;
     line-height: 112.5%;
     margin-bottom: var(--space-xl);
@@ -33,24 +33,29 @@ const { title, textItems } = Astro.props;
   .columns {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-xl);
-  }
-
-  .column:first-child p:first-child {
-    font-size: var(--fontsize-3);
-    line-height: 112.5%;
-    color: red;
-    margin-bottom: var(--space-m);
+    gap: var(--gap-default);
   }
 
   .column {
     display: flex;
     flex-direction: column;
-    font-size: var(--fontsize-0);
+
     line-height: 133%;
   }
 
-  :global(.column:first-child p:first-child) {
+  .column:first-child p:first-child {
+    font-size: var(--fontsize-2);
+    line-height: 112.5%;
     color: red;
+    margin-bottom: var(--space-m);
+  }
+
+  .column p {
+    font-size: var(--fontsize--1);
+  }
+
+  :global(.column:first-child p:first-child) {
+    /* color: red; */
+    font-weight: 600;
   }
 </style>
