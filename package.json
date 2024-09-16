@@ -24,6 +24,7 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.15.3",
+    "astro-icon": "^1.1.1",
     "astro-portabletext": "0.10.0",
     "astro-sanity-picture": "^0.2.0",
     "autoprefixer": "10.4.19",

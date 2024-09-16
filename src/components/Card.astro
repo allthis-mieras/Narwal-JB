@@ -45,7 +45,7 @@ const domain = post.url ? extractDomain(post.url) : "";
       </div>
     </div>
   </div>
-  <div class="card__media">
+  <!-- <div class="card__media">
     {
       post.mainImage ? (
         <img
@@ -60,7 +60,7 @@ const domain = post.url ? extractDomain(post.url) : "";
         <div class="card__cover--none" />
       )
     }
-  </div>
+  </div> -->
 </div>
 
 <style>
@@ -74,9 +74,13 @@ const domain = post.url ? extractDomain(post.url) : "";
     min-height: 400px;
     border-radius: 1rem;
     overflow: hidden;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
 
     &:active {
-      transform: scale(0.98);
+      transform: scale(0.99);
+      opacity: 0.4;
     }
 
     & .card__media {
@@ -84,18 +88,16 @@ const domain = post.url ? extractDomain(post.url) : "";
       z-index: 4;
 
       &::after {
-        content: "";
+        /* content: "";
         position: absolute;
-
         inset: 0;
-
-        background: linear-gradient(#ffffff47, #cee3ffea);
+        background: linear-gradient(#d2d6da96, #d2d6da);
         backdrop-filter: blur(0rem);
-        z-index: 0;
+        z-index: 0; */
       }
 
       &:hover::after {
-        backdrop-filter: blur(2rem);
+        /* backdrop-filter: blur(2rem); */
         background-color: red;
       }
     }
@@ -131,6 +133,7 @@ const domain = post.url ? extractDomain(post.url) : "";
     & .card__cat {
       font-size: var(--font-size-1);
       z-index: 10;
+      pointer-events: none;
     }
 
     & .card__cat {
@@ -212,22 +215,14 @@ const domain = post.url ? extractDomain(post.url) : "";
         position: absolute;
         inset: 0;
         z-index: -1;
-        background: linear-gradient(
-          180deg,
-          rgba(237, 247, 252, 0.8) 0%,
-          rgba(237, 247, 252, 0.9) 100%
-        );
+        background: linear-gradient(180deg, #d2d6da, #c2cad1);
         transition: all 2.2s cubic-bezier(0, 0.55, 0.45, 1);
         backdrop-filter: blur(0rem);
         opacity: 0.5;
       }
 
       &:hover::before {
-        background: linear-gradient(
-          180deg,
-          rgba(237, 247, 252, 0.8) 0%,
-          rgba(237, 247, 252, 0.9) 100%
-        );
+        background: linear-gradient(180deg, #d2d6da, #c2cad1);
         backdrop-filter: blur(0rem);
         opacity: 0.95;
       }

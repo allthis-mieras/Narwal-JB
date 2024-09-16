@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 
 import type { InferGetStaticParamsType } from "astro";
 import { Image } from "astro:assets";
@@ -47,23 +48,34 @@ console.log("post image:", post.mainImage);
 
 <Layout title={post.title!}>
   <section class="container stretch">
-    <h3 class="page__title">Articles</h3>
+    <div class="page__title">
+      <a transition:name="pagetitle" href="../articles">Articles</a>
+    </div>
 
     <div class="post__wrapper">
-      <div class="post__content">
-        <p class="post__cat">{post.category}</p>
+      <div class="post__content" transition:name="pagecontent">
         <h1 class="post__title">{post.title}</h1>
-        <p class="post__date">
-          {formatDate(post._createdAt)}
-        </p>
+        <div class="post__meta">
+          <p class="post__cat">{post.category}</p>
+          <p class="post__date">
+            {formatDate(post._createdAt)}
+          </p>
+        </div>
         <p class="post__excerpt">{post.excerpt}</p>
+
         <div class="post__content">
           <PortableText value={post.body} />
         </div>
+
         {
           post.url && (
-            <a href={post.url} class="card__url" target="_blank">
-              {domain}
+            <a
+              href={post.url}
+              class="button post__link"
+              target="_blank"
+              title={`Read more on ${domain}`}
+            >
+              Read more
             </a>
           )
         }
@@ -84,6 +96,7 @@ console.log("post image:", post.mainImage);
       }
     </div>
   </section>
+  <RelatedPosts currentSlug={slug} />
 </Layout>
 
 <style>
@@ -96,6 +109,7 @@ console.log("post image:", post.mainImage);
   .post__wrapper {
     width: 100%;
     margin: var(--space-1) 0 var(--space-4);
+    padding-bottom: 3rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: var(--space-2xl);
@@ -105,49 +119,37 @@ console.log("post image:", post.mainImage);
     order: 2;
   }
 
-  .post__cover,
-  .post__cover--none {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-
-    top: 0;
-    order: 1;
-  }
-
-  .post__cover--none {
-    background: var(--black);
+  .post__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-1);
+    color: var(--neutral-600);
   }
 
   .post__cat {
     font-family: var(--font-family-sans);
-    font-size: var(--fontsize-1);
+    font-size: var(--fontsize--2);
     font-weight: 600;
-    color: #ccc;
+  }
+
+  .post__date {
+    font-family: var(--font-family-sans);
+    font-size: var(--fontsize--2);
+    font-weight: 500;
   }
 
   .post__title {
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-serif);
     font-size: var(--fontsize-6);
-
     font-weight: 400;
     margin-top: var(--space-6xl);
     margin-bottom: var(--space-s) !important;
   }
 
-  .post__date {
-    font-weight: 400;
-    font-family: var(--font-family-sans);
-    font-size: var(--fontsize--2);
-
-    margin-top: var(--space-4);
-  }
-
   .post__excerpt {
     font-family: var(--font-family-sans);
     font-size: var(--fontsize-5);
-
-    margin-top: 0;
     font-weight: 400;
   }
 
@@ -159,35 +161,63 @@ console.log("post image:", post.mainImage);
     letter-spacing: -0.02em;
   }
 
+  .post__link {
+    font-size: var(--fontsize--1);
+    background-color: #f4f4f4;
+    border-radius: var(--radius-full);
+    padding: var(--space-s) var(--space-l);
+    text-decoration: none;
+    border-color: var(--neutral-300);
+  }
+
+  .post__link:hover {
+    background-color: var(--neutral-900);
+    color: var(--neutral-100);
+  }
+
+  .post__cover,
+  .post__cover--none {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    /* aspect-ratio: 3 / 4; */
+    top: 0;
+    order: 1;
+  }
+
+  .post__cover--none {
+    background: var(--neutral-background);
+  }
+
   @media (min-width: 906px) {
     .post__cover,
     .post__cover--none {
       width: 100%;
       order: 2;
       position: sticky;
+      top: 10vh;
+      border-radius: var(--radius-default);
     }
 
     .post__title {
       font-size: var(--fontsize-6);
+      font-weight: 600;
       margin: var(--space-1xl) 0;
       letter-spacing: -0.025em;
-    }
-
-    .post__date {
-      font-size: var(--font-size-3);
-      margin-top: var(--space-0);
+      margin-bottom: var(--space-xl);
     }
 
     .post__excerpt {
       font-size: var(--fontsize-2);
       line-height: 112.5%;
-      margin-top: var(--space-l);
+      margin-top: var(--space-xs);
       margin-bottom: var(--space-m);
     }
 
     .post__content {
       margin-bottom: var(--space-1xs);
       font-size: var(--fontsize-1);
+      margin-bottom: var(--space-xl);
     }
   }
 </style>

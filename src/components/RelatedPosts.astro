@@ -1,0 +1,53 @@
+---
+import { getPosts } from "../utils/sanity";
+import Card from "./Card.astro";
+
+const { currentSlug } = Astro.props;
+
+// Fetch all posts
+let posts = await getPosts();
+
+// Exclude the current post
+posts = posts.filter((post) => post.slug.current !== currentSlug);
+
+// Shuffle the posts
+posts = posts.sort(() => Math.random() - 0.5);
+
+// Limit to 3 random posts
+const relatedPosts = posts.slice(0, 3);
+---
+
+<section class="section__related container stretch">
+  <h4 class="section__title">Related Posts</h4>
+  <div class="section__title-grid">
+    {
+      relatedPosts.length ? (
+        relatedPosts.map((post) => <Card post={post} />)
+      ) : (
+        <p>No related posts available.</p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .section__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-block: 2rem;
+  }
+
+  .section__title-grid {
+    overflow-x: scroll;
+    display: grid;
+    border-radius: 1rem;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+    gap: var(--gap-default);
+  }
+
+  .section__related {
+    padding-block: 6rem;
+    background-color: var(--neutral-background);
+  }
+</style>

@@ -9,12 +9,14 @@ const posts = await getPosts();
 <Layout title="Articles">
   <div class="container stretch">
     <div class="page__title">
-      <h1>Articles</h1>
+      <h1><a href="../articles" transition:name="pagetitle">Articles</a></h1>
     </div>
     <section class="">
       {
         posts.length ? (
-          posts.map((post) => <Card post={post} />)
+          posts.map((post) => (
+            <Card transition:name="pagecontent" post={post} />
+          ))
         ) : (
           <p>no posts</p>
         )
@@ -23,6 +25,11 @@ const posts = await getPosts();
   </div>
 </Layout>
 <style>
+  .page__title a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
   section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

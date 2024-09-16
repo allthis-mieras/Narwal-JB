@@ -47,12 +47,14 @@ export default defineConfig({
     // token: isPreviewMode ? import.meta.env.PUBLIC_SANITY_AUTH_TOKEN : undefined,
     // ignoreBrowserTokenWarning: isPreviewMode ? true : false
 
-  }), react() // Required for Sanity Studio
-  ]
+  }), // Required for Sanity Studio
+  react(), icon()]
 });
-  
+
 
 import { createClient } from "@sanity/client";
+
+import icon from "astro-icon";
 
 // Initialize Sanity client
 const client = createClient({
