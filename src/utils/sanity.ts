@@ -96,11 +96,10 @@ export async function getHomepage(): Promise<Homepage> {
       highlight{
         text,
          button {
-            url->{
-              slug
-            },
+          "url": url->slug.current, // Fetch slug.current directly as a string
           label
         },
+        
         image{
           asset->{
             _id,

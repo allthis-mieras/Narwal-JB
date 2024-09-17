@@ -36,9 +36,16 @@ const posts = await getPosts();
 
 <style>
   .posts .container {
-    padding: var(--space-3xl) var(--gap-default);
+    padding-block: var(--gap-default);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--gap-default);
+    gap: var(--space-2xs);
+  }
+
+  @media (min-width: 896px) {
+    .posts .container {
+      padding: var(--space-3xl) var(--gap-default);
+      gap: var(--gap-default);
+    }
   }
 </style>

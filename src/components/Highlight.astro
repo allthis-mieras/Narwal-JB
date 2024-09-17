@@ -2,8 +2,9 @@
 import { Image } from "astro:assets";
 import { urlFor } from "../utils/image";
 
+// Update the Button interface to be more flexible and handle cases where `url` might not be resolved.
 interface Button {
-  url: { slug: { current: string } }; // Updated to use the resolved slug
+  url: string; // Changed from an object to a string
   label: string;
 }
 
@@ -13,12 +14,12 @@ interface Props {
   image: any;
 }
 
-// Generate the URL for the internal page
+// Generate the URL for the internal page, handle cases where `button.url` may not exist
 const { text, button, image }: Props = Astro.props;
-const linkUrl = button.url ? `/${button.url.slug.current}` : "#";
+
+const linkUrl = button.url ? `/${button.url}` : "#";
 
 const imageUrl = urlFor(image.asset.url ?? {}).url();
-// console.log("Highlight image:", image.asset.url);
 ---
 
 <section class="feature">
@@ -55,15 +56,16 @@ const imageUrl = urlFor(image.asset.url ?? {}).url();
   .feature__inner {
     position: absolute;
     inset: 0;
-    padding: var(--gap-default);
+    padding: var(--space-xl);
     z-index: 10;
     color: black;
     text-align: left;
   }
 
   .feature__inner p {
-    font-size: var(--fontsize-4);
-    font-weight: 100;
+    font-family: var(--font-family-serif);
+    font-size: var(--fontsize-7);
+    font-weight: 500;
     line-height: 112.5%;
     text-wrap:;
     margin-bottom: 1rem;
