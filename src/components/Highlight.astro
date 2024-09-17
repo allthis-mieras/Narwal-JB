@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import { urlFor } from "../utils/image";
 
 interface Button {
-  url: string;
+  url: { slug: { current: string } }; // Updated to use the resolved slug
   label: string;
 }
 
@@ -13,16 +13,18 @@ interface Props {
   image: any;
 }
 
+// Generate the URL for the internal page
 const { text, button, image }: Props = Astro.props;
+const linkUrl = button.url ? `/${button.url.slug.current}` : "#";
+
 const imageUrl = urlFor(image.asset.url ?? {}).url();
 // console.log("Highlight image:", image.asset.url);
-console.log("text", text, "button", button, "image", image);
 ---
 
 <section class="feature">
   <div class="feature__inner container stretch">
     <p>{text}</p>
-    <a href={button.url} class="button">{button.label}</a>
+    <a href={linkUrl} class="button">{button.label}</a>
   </div>
 
   {

@@ -95,8 +95,10 @@ export async function getHomepage(): Promise<Homepage> {
       },
       highlight{
         text,
-        button{
-          url,
+         button {
+            url->{
+              slug
+            },
           label
         },
         image{

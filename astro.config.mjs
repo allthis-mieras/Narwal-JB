@@ -22,6 +22,7 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [icon()],
   // Hybrid+adapter is required to support embedded Sanity Studio
   // output: "hybrid",
   output: 'hybrid',

@@ -105,7 +105,9 @@ export default defineType({
             {
               name: "url",
               title: "URL",
-              type: "url",
+              type: "reference",
+              to: [{ type: "page" }], // Reference to a page document type
+              description: "Link to an internal page.",
             },
             {
               name: "label",
