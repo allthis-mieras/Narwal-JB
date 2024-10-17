@@ -24,10 +24,10 @@ function initializeSwiper() {
       crossFade: true,
     },
     autoplay: {
-      delay: 5000,
-      disableOnInteraction: false, // Keeps autoplay running after user interaction
+      delay: 7000,
+      disableOnInteraction: true, // Keeps autoplay running after user interaction
     },
-    speed: 500,
+    speed: 1000,
   });
 }
 

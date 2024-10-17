@@ -92,14 +92,16 @@ body .pagination a {
 }
 
 .page__title {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-m) 0;
   font-weight: 400;
   margin-top: var(--space-3xl);
 
   & h1,
   & h2 {
     font-family: var(--font-family-serif);
-    font-size: var(--fontsize-8);
+    font-size: var(--fontsize-6);
     line-height: 100%;
+    font-weight: 400;
+    ;
   }
 }
