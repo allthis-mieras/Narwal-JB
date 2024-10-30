@@ -79,37 +79,37 @@ export async function getPosts(): Promise<Post[]> {
 
 // Fetch Homepage Data
 export async function getHomepage(): Promise<Homepage> {
-  return await sanityClient.fetch(
-    groq`*[_type == "page" && type == "homepage"][0]{
-      _type,
-      title,
-      hero{
-        heroText,
-        heroSlides[]{
-          _key,
-          asset->{
-            _id,
-            url
-          },
-          caption
-        }
-      },
-      highlight{
-        text,
-         button {
-          "url": url->slug.current, // Fetch slug.current directly as a string
-          label
+  const query = groq`*[_type == "page" && type == "homepage"][0]{
+    _type,
+    title,
+    hero{
+      heroText,
+      heroSlides[]{
+        _key,
+        asset->{
+          _id,
+          url
         },
-        
-        image{
-          asset->{
-            _id,
-            url
-          }
+        caption
+      }
+    },
+    highlight{
+      text,
+      button {
+        "url": url->slug.current, // Fetch slug.current directly as a string
+        label
+      },
+      image{
+        asset->{
+          _id,
+          url
         }
       }
-    }`
-  );
+    }
+  }`;
+
+  const { data } = await loadQuery<Homepage>({ query });
+  return data;
 }
 
 export async function getPost(slug: string): Promise<Post> {
@@ -136,31 +136,32 @@ export async function getPost(slug: string): Promise<Post> {
 
 // Fetch About Page by Slug
 export async function getAboutPage(): Promise<Page> {
-  return await sanityClient.fetch(
-    groq`*[_type == "page" && slug.current == "about"][0]{
-      title,
-      pageText,
-      content[]{
-        ...,
-        _type == "imageBlock" => {
-          _type,
-          _key,
-          image{
-            asset->{
-              _id,
-              url
-            },
-            alt,
-            caption
-          }
-        }
-      },
-      heroImage{
-        asset->{
-          _id,
-          url
+  const query = groq`*[_type == "page" && slug.current == "about"][0]{
+    title,
+    pageText,
+    content[]{
+      ...,
+      _type == "imageBlock" => {
+        _type,
+        _key,
+        image{
+          asset->{
+            _id,
+            url
+          },
+          alt,
+          caption
         }
       }
-    }`
-  );
+    },
+    heroImage{
+      asset->{
+        _id,
+        url
+      }
+    }
+  }`;
+
+  const { data } = await loadQuery<Page>({ query });
+  return data;
 }
