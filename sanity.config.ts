@@ -21,19 +21,15 @@ if (!projectId || !dataset) {
 }
 
 import { defineConfig } from "sanity";
-import { structureTool } from 'sanity/structure'
-// import { presentationTool } from 'sanity/presentation'
 import { visionTool } from "@sanity/vision";
+import { structureTool } from 'sanity/structure'
+import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from "./schema";
+import { resolve } from "./src/utils/resolve";
 import { CogIcon, DocumentIcon } from "@sanity/icons";
-import type { SanityDocument } from 'sanity'
+// import type { SanityDocument } from 'sanity'
 
-// Pas deze functie aan om de juiste URL weer te geven op basis van het huidige document
-function getPreviewUrl(doc: SanityDocument) {
-  return doc?.slug && typeof doc.slug === 'object' && 'current' in doc.slug
-    ? `${window.location.host}/${doc.slug.current}`
-    : window.location.host
-}
+
 
 
 // Define the actions that should be available for singleton documents
@@ -82,6 +78,10 @@ export default defineConfig({
             // Singleton for About Page
             
           ]),
+    }),
+     presentationTool({
+      resolve,
+      previewUrl: location.origin,
     }),
     visionTool(),
    

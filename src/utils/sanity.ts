@@ -2,6 +2,7 @@ import { sanityClient } from "sanity:client";
 import type { PortableTextBlock } from "@portabletext/types";
 import type { Slug } from "@sanity/types";
 import groq from "groq";
+import { loadQuery } from '../utils/load-query';
 
 
 
@@ -111,27 +112,26 @@ export async function getHomepage(): Promise<Homepage> {
   );
 }
 
-
 export async function getPost(slug: string): Promise<Post> {
-  return await sanityClient.fetch(
-    groq`*[_type == "post" && slug.current == $slug][0]{
-      _id,
-      title,
-      slug,
-      _createdAt,
-      excerpt,
-      mainImage{
-        asset->{
-          _id,
-          url
-        }
-      },
-      url,
-      category,
-      body
-    }`,
-    { slug }
-  );
+  const query = groq`*[_type == "post" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    _createdAt,
+    excerpt,
+    mainImage{
+      asset->{
+        _id,
+        url
+      }
+    },
+    url,
+    category,
+    body
+  }`;
+
+  const { data } = await loadQuery<Post>({ query, params: { slug } });
+  return data;
 }
 
 // Fetch About Page by Slug

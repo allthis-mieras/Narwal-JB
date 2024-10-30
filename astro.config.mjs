@@ -1,77 +1,67 @@
 // Loading environment variables from .env files
 // https://docs.astro.build/en/guides/configuring-astro/#environment-variables
-import { loadEnv } from "vite";
-const {
-  PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  PUBLIC_SANITY_STUDIO_DATASET,
-  PUBLIC_SANITY_PROJECT_ID,
-  PUBLIC_SANITY_DATASET,
-} = loadEnv(import.meta.env.MODE, process.cwd(), "");
 import { defineConfig } from "astro/config";
-// import isPreviewMode from './src/utils/isPreviewMode';
-
-// Different environments use different variables
-const projectId = PUBLIC_SANITY_STUDIO_PROJECT_ID || PUBLIC_SANITY_PROJECT_ID;
-const dataset = PUBLIC_SANITY_STUDIO_DATASET || PUBLIC_SANITY_DATASET;
-
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
-
-// Change this depending on your hosting provider (Vercel, Netlify etc)
+import { loadEnv } from "vite";
 import netlify from '@astrojs/netlify';
+import icon from "astro-icon";
 
-// https://astro.build/config
+
+const {
+  PUBLIC_SANITY_PROJECT_ID,
+  PUBLIC_SANITY_DATASET,
+  PUBLIC_SANITY_USE_CDN,
+  PUBLIC_SANITY_VISUAL_EDITING_ENABLED
+} = loadEnv(import.meta.env.MODE, process.cwd(), "");
+
+
 export default defineConfig({
-  integrations: [icon()],
-  // Hybrid+adapter is required to support embedded Sanity Studio
-  // output: "hybrid",
-  output: 'hybrid',
+  integrations: [sanity({
+    projectId: PUBLIC_SANITY_PROJECT_ID,
+    dataset: PUBLIC_SANITY_DATASET,
+    apiVersion: "2023-05-31",
+    studioBasePath: "/admin", 
+      stega: {
+        studioUrl: "/admin"
+    },
+    useCdn: PUBLIC_SANITY_USE_CDN === "true", 
+  }), react(), icon()],
+  output: 'server',
   adapter: netlify({
     imageCDN: true,
   }),
   image: {
-      domains: ['sanity.io'],
-      remotePatterns: [{
-      protocol: 'https',
-      hostname: '**.sanity.io',
-    }],
-    },
+    domains: ['sanity.io'],
+    remotePatterns: [{
+    protocol: 'https',
+    hostname: '**.sanity.io',
+  }],
+  },
+});
+
+const visualEditingEnabled = PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
+     const perspective = visualEditingEnabled ? 'previewDrafts' : 'published';
+
+// const client = createClient({
+//  projectId: PUBLIC_SANITY_PROJECT_ID,
+//     dataset: PUBLIC_SANITY_DATASET,
     
-  integrations: [sanity({
-    projectId,
-    dataset,
-    studioBasePath: "/admin",
-    useCdn: false,
-    // `false` if you want to ensure fresh data
-    apiVersion: "2023-05-31", // Set to date of setup to use the latest API version
-    // perspective: isPreviewMode? 'previewDrafts' : 'published', 
-    // token: isPreviewMode ? import.meta.env.PUBLIC_SANITY_AUTH_TOKEN : undefined,
-    // ignoreBrowserTokenWarning: isPreviewMode ? true : false
+//  useCdn: false, // must be false when using 'previewDrafts'
+//   perspective: perspective, // 'raw' | 'previewDrafts' | 'published'
+//   apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
+// });
 
-  }), // Required for Sanity Studio
-  react(), icon()]
-});
-
-
-import { createClient } from "@sanity/client";
-
-import icon from "astro-icon";
-
-// Initialize Sanity client
-const client = createClient({
-  projectId: projectId,
-  dataset: dataset,
-  useCdn: false, // Ensure no accidental 'stale' data
-  apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
-});
 
 // Fetch our redirects from Sanity via GROQ
-const redirectData = await client.fetch(
-  `*[_type == "redirect"]{
-      "from": from.current,
-      "to": to.current
-    }`
-);
+// const redirectData = await client.fetch(
+//   `*[_type == "redirect"]{
+//       "from": from.current,
+//       "to": to.current
+//     }`
+// );
 
-// Create empty object to add our redirects to
-const redirects = {};
+ // Create empty object to add our redirects to
+// const redirects = {};
+
+

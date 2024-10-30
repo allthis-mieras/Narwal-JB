@@ -17,18 +17,23 @@ import Nav from "../components/Nav.astro";
     top: 0;
     right: 0;
     left: 0;
+    mix-blend-mode: exclusion;
+  }
+
+  .header__title {
+    font-family: var(--font-family-serif);
   }
 
   .container {
     display: flex;
-    background: rgba(255, 255, 255, 0.2);
+    /* background: rgba(255, 255, 255, 0.2); */
     padding: var(--space-xs) var(--space-s);
     justify-content: space-between;
     align-items: center;
 
     border-radius: 100vw;
 
-    backdrop-filter: blur(1vw);
+    /* backdrop-filter: blur(1vw); */
 
     & .header__title {
       font-weight: 600;
@@ -36,7 +41,7 @@ import Nav from "../components/Nav.astro";
       line-height: 100%;
 
       text-decoration: none;
-      color: var(--black);
+      color: var(--background-full);
     }
   }
 </style>

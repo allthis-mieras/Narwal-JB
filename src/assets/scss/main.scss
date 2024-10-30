@@ -20,7 +20,7 @@
     Arial,
     sans-serif;
   --font-family-default: 'Inter', sans-serif, var(--font-system);
-  --font-family-serif: "PT Serif", "Playfair Display", var(--font-system-serif),
+  --font-family-serif: "Playfair Display", "PT Serif", var(--font-system-serif),
     serif;
   --font-family-mono: ui-monospace,
     'Cascadia Code',
@@ -105,3 +105,26 @@ body .pagination a {
     ;
   }
 }
+
+.column {
+
+  & h1:first-child,
+  & h2:first-child,
+  & h3:first-child,
+  & h4:first-child,
+  {
+  margin-top: 0;
+}
+}
+
+
+
+// html {
+//   background-color: var(--white);
+//   font-family: var(--font-family-sans), var(--font-family-serif), sans-serif;
+//   text-size-adjust: 100%;
+// }
+
+// body {
+//   margin: 0;
+// }

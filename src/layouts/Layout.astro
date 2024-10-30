@@ -1,4 +1,6 @@
 ---
+import { VisualEditing } from "@sanity/astro/visual-editing";
+
 import "../assets/scss/global.scss";
 import "../assets/scss/main.scss";
 import SiteMeta from "../components/SiteMeta.astro";
@@ -12,9 +14,11 @@ const {
   image = "/social-preview-image.jpg",
   author = "Jacuqes Buith",
 } = Astro.props;
+
+const visualEditingEnabled =
+  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED == "true";
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -50,22 +54,7 @@ const {
         <slot />
       </main>
       <Footer />
+      <VisualEditing enabled={visualEditingEnabled} zIndex={1000} />
     </div>
-
-    <style is:global>
-      :root {
-      }
-
-      html {
-        background-color: var(--white);
-        font-family: var(--font-family-sans), var(--font-family-serif),
-          sans-serif;
-        text-size-adjust: 100%;
-      }
-
-      body {
-        margin: 0;
-      }
-    </style>
   </body>
 </html>
