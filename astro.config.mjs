@@ -17,6 +17,7 @@ const {
 
 
 export default defineConfig({
+  
   integrations: [sanity({
     projectId: PUBLIC_SANITY_PROJECT_ID,
     dataset: PUBLIC_SANITY_DATASET,
@@ -29,7 +30,7 @@ export default defineConfig({
   }), react(), icon()],
   output: 'server',
   adapter: netlify({
-    imageCDN: true,
+    imageCDN: false,
   }),
   image: {
     domains: ['sanity.io'],
