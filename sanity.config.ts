@@ -79,9 +79,10 @@ export default defineConfig({
             
           ]),
     }),
-     presentationTool({
+      presentationTool({
       resolve,
-      previewUrl: location.origin,
+      title: 'Visual Editor',
+      previewUrl: `${location.origin}?preview=true`,
     }),
     visionTool(),
    
